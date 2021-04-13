@@ -1,12 +1,13 @@
 import React from 'react';
 import './app.scss';
+import LoginPage from './pages/LoginPage/LoginPage';
 
 class App extends React.Component {
   render() {
     return (
       <>
         <div className="content">
-          <h1>Hello world</h1>
+          <LoginPage />
         </div>
       </>
     );
