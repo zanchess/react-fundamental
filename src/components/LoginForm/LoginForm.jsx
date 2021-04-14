@@ -5,7 +5,7 @@ import './login-form.scss';
 const LoginForm = () => (
   <>
     <Form className="login-form">
-      <Form.Group controlId="formBasicEmail">
+      <Form.Group controlId="for">
         <Form.Label>Login</Form.Label>
         <Form.Control type="text" placeholder="Login" />
       </Form.Group>
