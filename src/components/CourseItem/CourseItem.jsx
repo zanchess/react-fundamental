@@ -2,14 +2,21 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import './course-item.scss';
 
-const CourseItem = () => (
+const CourseItem = (props) => (
   <>
     <Card className="course-item">
-      <Card.Header>Course 1</Card.Header>
+      <Card.Header>{props.info.name}</Card.Header>
       <Card.Body>
-        <Card.Title>Start Date</Card.Title>
+        <div className="course-item__wrap">
+          <Card.Text>
+            {`Date start ${props.info.start}`}
+          </Card.Text>
+          <Card.Text>
+            {`Duration ${props.info.duration.hours} hours ${props.info.duration.minutes} minutes`}
+          </Card.Text>
+        </div>
         <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
+          {props.info.description}
         </Card.Text>
         <Button className="course-item__button_edit" variant="primary">Edit Course</Button>
         <Button className="course-item__button_delete" variant="primary">Delete Course</Button>
