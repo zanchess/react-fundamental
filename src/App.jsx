@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import Header from './components/Header/Header';
 import CoursesPage from './pages/CoursesPage/CoursesPage';
 import Searching from './components/Searching/Searching';
+import CreatePage from './pages/CreatePage/CreatePage';
 
 class App extends React.Component {
   render() {
@@ -11,7 +12,7 @@ class App extends React.Component {
       <>
         <div className="content">
           <Header />
-          <CoursesPage />
+          <CreatePage />
         </div>
       </>
     );
