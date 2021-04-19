@@ -13,7 +13,15 @@ const CoursesPage = () => {
       .then((res) => setCourses(res.data));
   });
 
-  const coursesList = courses.map((course) => <CourseItem info={course} />);
+  const coursesList = courses.map((course) => (
+    <CourseItem
+      name={course.name}
+      start={course.start}
+      hours={course.duration.hours}
+      minutes={course.duration.minutes}
+      description={course.description}
+    />
+  ));
   return (
     <div className="login-page">
       <div className="courses__block">
