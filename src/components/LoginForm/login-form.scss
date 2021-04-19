@@ -1,4 +1,25 @@
 .login-form{
   width: 500px;
   margin: 100px auto;
+
+  .login-incorrect{
+    display: block;
+    color: #d44040;
+  }
+
+  .login-incorrect-border{
+    border-color: #d44040;
+  }
+
+  .login-correct{
+    display: none;
+  }
+
+  .login-empty{
+    display: block;
+    color: #d44040;
+  }
+  .login-not-empty{
+    display: none;
+  }
 }
