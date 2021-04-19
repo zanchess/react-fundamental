@@ -22,4 +22,26 @@
   .login-not-empty{
     display: none;
   }
+
+  .password-incorrect{
+    display: block;
+    color: #d44040;
+  }
+
+  .password-incorrect-border{
+    border-color: #d44040;
+  }
+
+  .password-correct{
+    display: none;
+  }
+
+  .password-empty{
+    display: block;
+    color: #d44040;
+  }
+
+  .password-not-empty {
+    display: none;
+  }
 }
