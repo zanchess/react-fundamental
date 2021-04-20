@@ -1,12 +1,30 @@
 import React, { useState } from 'react';
 import {
-  Form, Button, Col, Row,
+  Form, Button, Col,
 } from 'react-bootstrap';
 import './course-info-from.scss';
 
 const LoginForm = () => {
-  const loginRegExp = /^[A-z]+$/;
-  const passwordRegExp = /^[A-z0-9]+$/;
+  // input values
+  const [titleValue, setTitleValue] = useState('');
+  const [descriptionValue, setDescriptionValue] = useState('');
+  const [startDateValue, setStartDateValue] = useState('');
+  const [durationValue, setDurationValue] = useState('');
+
+  const handleChange = (event) => {
+    if (event.target.name === 'title') setTitleValue(event.target.value);
+    if (event.target.name === 'description') setDescriptionValue(event.target.value);
+    if (event.target.name === 'start') setStartDateValue(event.target.value);
+    if (event.target.name === 'duration') setDurationValue(event.target.value);
+  };
+
+  const getTimeFromMins = (mins) => {
+    if (mins && !isNaN(+mins)) {
+      const hours = Math.trunc(mins / 60) < 10 ? `0${Math.trunc(mins / 60)}` : Math.trunc(mins / 60);
+      const minutes = mins % 60 < 10 ? `0${mins % 60}` : mins % 60;
+      return `${hours}:${minutes}`;
+    }
+  };
 
   return (
     <>
@@ -16,7 +34,7 @@ const LoginForm = () => {
             Title
           </Form.Label>
           <Col>
-            <Form.Control size="sm" type="text" placeholder="Small text" />
+            <Form.Control onChange={handleChange} name="title" value={titleValue} size="sm" type="text" placeholder="Small text" />
           </Col>
         </Form.Row>
         <Form.Row>
@@ -24,7 +42,7 @@ const LoginForm = () => {
             Description
           </Form.Label>
           <Col>
-            <Form.Control as="textarea" rows={3} />
+            <Form.Control onChange={handleChange} name="description" value={descriptionValue} as="textarea" rows={3} />
           </Col>
         </Form.Row>
         <Form.Row>
@@ -32,7 +50,7 @@ const LoginForm = () => {
             Start Date
           </Form.Label>
           <Col>
-            <Form.Control size="sm" type="text" placeholder="Small text" />
+            <Form.Control onChange={handleChange} name="start" value={startDateValue} size="sm" type="text" placeholder="Small text" />
           </Col>
         </Form.Row>
         <Form.Row>
@@ -40,7 +58,10 @@ const LoginForm = () => {
             Duration
           </Form.Label>
           <Col>
-            <Form.Control size="sm" type="text" placeholder="Small text" />
+            <Form.Control onChange={handleChange} name="duration" value={durationValue} size="sm" type="text" placeholder="Small text" />
+          </Col>
+          <Col>
+            <span>{getTimeFromMins(durationValue)}</span>
           </Col>
         </Form.Row>
         <Form.Row>
