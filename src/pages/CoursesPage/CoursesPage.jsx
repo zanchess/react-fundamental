@@ -1,40 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './courses-page.scss';
-import axios from 'axios';
-import { Button } from 'react-bootstrap';
-import CourseItem from '../../components/CourseItem/CourseItem';
-import Searching from '../../components/Searching/Searching';
+import Courses from '../../components/Courses/Courses';
 
-const CoursesPage = () => {
-  const [courses, setCourses] = useState([]);
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/api/courses')
-      .then((res) => setCourses(res.data));
-  });
-
-  const coursesList = courses.map((course) => (
-    <CourseItem
-      name={course.name}
-      start={course.start}
-      hours={course.duration.hours}
-      minutes={course.duration.minutes}
-      description={course.description}
-    />
-  ));
-  return (
-    <div className="login-page">
-      <div className="courses__block">
-        <div className="login-page__control">
-          <Searching />
-          <Button className="add-btn" variant="primary">Add Course</Button>
-        </div>
-        <div className="course__block_courses">
-          {coursesList}
-        </div>
-      </div>
-    </div>
-  );
-};
+const CoursesPage = () => (
+  <div className="login-page">
+    <Courses />
+  </div>
+);
 
 export default CoursesPage;
