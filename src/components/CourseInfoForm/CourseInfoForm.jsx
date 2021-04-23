@@ -5,7 +5,7 @@ import {
 import './course-info-from.scss';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 
-const LoginForm = () => {
+const LoginForm = ({ hideForm }) => {
   // input values
   const [titleValue, setTitleValue] = useState('');
   const [descriptionValue, setDescriptionValue] = useState('');
@@ -88,7 +88,7 @@ const LoginForm = () => {
         <Button className="btn-group__save" variant="primary" type="submit">
           Save
         </Button>
-        <Button className="btn-group__cancel" variant="primary" type="submit">
+        <Button onClick={hideForm} className="btn-group__cancel" variant="primary" type="submit">
           Cancel
         </Button>
       </div>

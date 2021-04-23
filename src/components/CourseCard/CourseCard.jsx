@@ -16,7 +16,7 @@ const CourseCard = ({
         <Card.Body>
           <div className="course-item__wrap">
             <Card.Text>
-              {`Date start ${start}`}
+              {`Date start: ${start}`}
             </Card.Text>
             <Card.Text>
               {getTimeFromMins(duration)}
@@ -30,7 +30,7 @@ const CourseCard = ({
             {' '}
             <br />
             {authorsNameObj.map((author, i) => (
-              <span>
+              <span key={i}>
                 {i + 1}
                 {')'}
                 {author}
