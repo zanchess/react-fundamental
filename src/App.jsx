@@ -57,6 +57,12 @@ const App = () => {
     setEditPageStatus(false);
   };
 
+  const searchCourse = (searchString) => {
+    axios
+      .get('http://localhost:3001/api/courses')
+      .then((res) => setCourses(res.data.filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase()) || course.title.toLowerCase().includes(searchString.toLowerCase()))));
+  };
+
   return (
     <>
       <div className="content">
@@ -67,6 +73,7 @@ const App = () => {
             allAuthors={allAuthors}
             showCreateCourseForm={showCreateCourseForm}
             showEditCourseForm={showEditCourseForm}
+            searchCourse={searchCourse}
           />
         </div>
         <div className={coursesPageIsHidden ? 'courses-form visible' : 'courses-form hidden'}>

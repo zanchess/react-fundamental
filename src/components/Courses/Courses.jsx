@@ -21,7 +21,7 @@ const Courses = (props) => {
     <div className="login-page">
       <div className="courses__block">
         <div className="login-page__control">
-          <Searching />
+          <Searching searchCourse={props.searchCourse} />
           <Button onClick={props.showCreateCourseForm} className="add-btn" variant="primary">Add Course</Button>
         </div>
         <div className="course__block_courses">

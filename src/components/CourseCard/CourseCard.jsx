@@ -38,8 +38,7 @@ const CourseCard = ({
               </span>
             ))}
           </Card.Text>
-          <Button onClick={showEditCourseForm} className="course-item__button_edit" variant="primary">Edit Course</Button>
-          <Button className="course-item__button_delete" variant="primary">Delete Course</Button>
+          <Button onClick={showEditCourseForm} className="course-item__button_edit" variant="primary">Show Course</Button>
         </Card.Body>
       </Card>
     </>
