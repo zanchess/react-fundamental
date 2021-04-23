@@ -30,7 +30,13 @@ const App = () => {
         />
       );
     }
-    if (coursesPageIsHidden && isEditPage) return <EditCoursePage />;
+    if (coursesPageIsHidden && isEditPage) {
+      return (
+        <EditCoursePage
+          hideEditCourseForm={hideEditCourseForm}
+        />
+      );
+    }
   };
 
   const showEditCourseForm = () => {
@@ -60,10 +66,11 @@ const App = () => {
             courses={courses}
             allAuthors={allAuthors}
             showCreateCourseForm={showCreateCourseForm}
+            showEditCourseForm={showEditCourseForm}
           />
         </div>
         <div className={coursesPageIsHidden ? 'courses-form visible' : 'courses-form hidden'}>
-          {renderCourseForm()}
+          {coursesPageIsHidden ? renderCourseForm() : null}
         </div>
       </div>
     </>

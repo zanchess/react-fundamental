@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 
 const CourseCard = ({
-  title, start, duration, description, authors, allAuthors,
+  title, start, duration, description, authors, allAuthors, showEditCourseForm,
 }) => {
   const authorsNameObj = authors.map((id) => allAuthors.find((author) => id === author.id)).map((author) => author.name);
 
@@ -38,7 +38,7 @@ const CourseCard = ({
               </span>
             ))}
           </Card.Text>
-          <Button className="course-item__button_edit" variant="primary">Edit Course</Button>
+          <Button onClick={showEditCourseForm} className="course-item__button_edit" variant="primary">Edit Course</Button>
           <Button className="course-item__button_delete" variant="primary">Delete Course</Button>
         </Card.Body>
       </Card>

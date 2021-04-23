@@ -14,6 +14,7 @@ const Courses = (props) => {
       description={course.description}
       authors={course.authors}
       allAuthors={props.allAuthors}
+      showEditCourseForm={props.showEditCourseForm}
     />
   ));
   return (

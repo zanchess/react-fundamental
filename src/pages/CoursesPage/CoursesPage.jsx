@@ -6,12 +6,14 @@ const CoursesPage = ({
   courses,
   allAuthors,
   showCreateCourseForm,
+  showEditCourseForm,
 }) => (
   <div className="courses">
     <Courses
       courses={courses}
       allAuthors={allAuthors}
       showCreateCourseForm={showCreateCourseForm}
+      showEditCourseForm={showEditCourseForm}
     />
   </div>
 );
