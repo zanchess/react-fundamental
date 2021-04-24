@@ -6,6 +6,7 @@ import Header from './components/Header/Header';
 import CoursesPage from './pages/CoursesPage/CoursesPage';
 import CreateCoursePage from './pages/CreateCoursePage/CreateCoursePage';
 import EditCoursePage from './pages/EditCoursePage/EditCoursePage';
+import db from './db';
 
 const App = () => {
   const [courses, setCourses] = useState([]);
@@ -14,12 +15,15 @@ const App = () => {
   const [coursesPageIsHidden, setCoursesPageStatus] = useState(false);
 
   useEffect(() => {
-    axios
+    /* axios
       .get('http://localhost:3001/api/authors')
       .then((res) => setAllAuthors(res.data));
     axios
       .get('http://localhost:3001/api/courses')
-      .then((res) => setCourses(res.data));
+      .then((res) => setCourses(res.data)); */
+    setAllAuthors(db.mockedAuthorsList);
+    setCourses(db.mockedCourseList);
+    console.log(db);
   }, []);
 
   const renderCourseForm = () => {
@@ -58,9 +62,15 @@ const App = () => {
   };
 
   const searchCourse = (searchString) => {
-    axios
+    /* axios
       .get('http://localhost:3001/api/courses')
-      .then((res) => setCourses(res.data.filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase()) || course.title.toLowerCase().includes(searchString.toLowerCase()))));
+      .then((res) => setCourses(res.data)); */
+    if (searchString) {
+      const searchedCourses = db.mockedCourseList.filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase()) || course.title.toLowerCase().includes(searchString.toLowerCase()));
+      setCourses(searchedCourses);
+    } else {
+      setCourses(db.mockedCourseList);
+    }
   };
 
   return (
