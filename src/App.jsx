@@ -13,6 +13,7 @@ const App = () => {
   const [allAuthors, setAllAuthors] = useState([]);
   const [isEditPage, setEditPageStatus] = useState(false);
   const [coursesPageIsHidden, setCoursesPageStatus] = useState(false);
+  const [filteredCourses, setfilteredCourses] = useState([]);
 
   useEffect(() => {
     /* axios
@@ -67,8 +68,9 @@ const App = () => {
       .then((res) => setCourses(res.data)); */
     if (searchString) {
       const searchedCourses = db.mockedCourseList.filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase()) || course.title.toLowerCase().includes(searchString.toLowerCase()));
-      setCourses(searchedCourses);
+      setfilteredCourses(searchedCourses);
     } else {
+      setfilteredCourses([]);
       setCourses(db.mockedCourseList);
     }
   };
@@ -79,7 +81,7 @@ const App = () => {
         <Header />
         <div className={coursesPageIsHidden ? 'courses-page hidden' : 'courses-page visible'}>
           <CoursesPage
-            courses={courses}
+            courses={filteredCourses.length ? filteredCourses : courses}
             allAuthors={allAuthors}
             showCreateCourseForm={showCreateCourseForm}
             showEditCourseForm={showEditCourseForm}
