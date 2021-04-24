@@ -9,7 +9,7 @@ const Courses = (props) => {
     <CourseCard
       key={index}
       title={course.title}
-      start={course.start}
+      start={course.creationDate}
       duration={course.duration}
       description={course.description}
       authors={course.authors}
