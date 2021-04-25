@@ -1,10 +1,11 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import './course-card.scss';
+import { Link } from 'react-router-dom';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 
 const CourseCard = ({
-  title, start, duration, description, authors, allAuthors, showEditCourseForm,
+  title, start, duration, description, authors, allAuthors,
 }) => {
   const authorsNameObj = authors
     .map((id) => allAuthors.find((author) => id === author.id))
@@ -39,7 +40,7 @@ const CourseCard = ({
               </span>
             ))}
           </Card.Text>
-          <Button onClick={showEditCourseForm} className="course-item__button_edit" variant="primary">Show Course</Button>
+          <Link to="/courses/1">Show Course</Link>
         </Card.Body>
       </Card>
     </>

@@ -17,7 +17,6 @@ const Courses = (props) => {
       showEditCourseForm={props.showEditCourseForm}
     />
   ));
-  console.log(props);
   return (
     <div className="login-page">
       <div className="courses__block">

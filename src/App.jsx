@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 import CoursesPage from './pages/CoursesPage/CoursesPage';
 import CreateCoursePage from './pages/CreateCoursePage/CreateCoursePage';
 import EditCoursePage from './pages/EditCoursePage/EditCoursePage';
-import CourseInfoPage from './pages/CourseInfo/CourseInfoPage';
+import CourseInfoPage from './pages/CourseInfoPage/CourseInfoPage';
 import db from './db';
 import ROUTE from './constants/routes';
 
@@ -101,7 +101,6 @@ const App = () => {
               />
             )}
           />
-          <Route path={`${ROUTE.COURSES}/:id`} component={CourseInfoPage} />
         </Switch>
         <div className={coursesPageIsHidden ? 'courses-form visible' : 'courses-form hidden'}>
           {coursesPageIsHidden ? renderCourseForm() : null}
