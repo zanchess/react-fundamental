@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './app.scss';
-import axios from 'axios';
-import LoginPage from './pages/LoginPage/LoginPage';
 import Header from './components/Header/Header';
 import CoursesPage from './pages/CoursesPage/CoursesPage';
 import CreateCoursePage from './pages/CreateCoursePage/CreateCoursePage';
@@ -24,8 +22,16 @@ const App = () => {
       .then((res) => setCourses(res.data)); */
     setAllAuthors(db.mockedAuthorsList);
     setCourses(db.mockedCourseList);
-    console.log(db);
   }, []);
+
+  const hideCreateCourseForm = () => {
+    setCoursesPageStatus(false);
+  };
+
+  const hideEditCourseForm = () => {
+    setCoursesPageStatus(false);
+    setEditPageStatus(false);
+  };
 
   const renderCourseForm = () => {
     if (coursesPageIsHidden && !isEditPage) {
@@ -42,6 +48,7 @@ const App = () => {
         />
       );
     }
+    return null;
   };
 
   const showEditCourseForm = () => {
@@ -53,21 +60,14 @@ const App = () => {
     setCoursesPageStatus(true);
   };
 
-  const hideCreateCourseForm = () => {
-    setCoursesPageStatus(false);
-  };
-
-  const hideEditCourseForm = () => {
-    setCoursesPageStatus(false);
-    setEditPageStatus(false);
-  };
-
   const searchCourse = (searchString) => {
     /* axios
       .get('http://localhost:3001/api/courses')
       .then((res) => setCourses(res.data)); */
     if (searchString) {
-      const searchedCourses = db.mockedCourseList.filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase()) || course.title.toLowerCase().includes(searchString.toLowerCase()));
+      const searchedCourses = db.mockedCourseList
+        .filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase())
+          || course.title.toLowerCase().includes(searchString.toLowerCase()));
       setfilteredCourses(searchedCourses);
     } else {
       setfilteredCourses([]);

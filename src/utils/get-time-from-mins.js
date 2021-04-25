@@ -4,6 +4,7 @@ const getTimeFromMins = (mins) => {
     const minutes = mins % 60 < 10 ? `0${mins % 60}` : mins % 60;
     return `Duration : ${hours} hours ${minutes} minutes`;
   }
+  return null;
 };
 
 export default getTimeFromMins;
