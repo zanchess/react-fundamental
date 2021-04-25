@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import './app.scss';
+import { Route, Switch } from 'react-router-dom';
 import Header from './components/Header/Header';
 import CoursesPage from './pages/CoursesPage/CoursesPage';
 import CreateCoursePage from './pages/CreateCoursePage/CreateCoursePage';
 import EditCoursePage from './pages/EditCoursePage/EditCoursePage';
 import db from './db';
+import ROUTE from './constants/routes';
 
 const App = () => {
+  // state hooks
   const [courses, setCourses] = useState([]);
   const [allAuthors, setAllAuthors] = useState([]);
   const [isEditPage, setEditPageStatus] = useState(false);
   const [coursesPageIsHidden, setCoursesPageStatus] = useState(false);
   const [filteredCourses, setfilteredCourses] = useState([]);
 
+  // Lifecycle hooks
   useEffect(() => {
     /* axios
       .get('http://localhost:3001/api/authors')
@@ -24,6 +28,7 @@ const App = () => {
     setCourses(db.mockedCourseList);
   }, []);
 
+  // Changing conditions for rendering
   const hideCreateCourseForm = () => {
     setCoursesPageStatus(false);
   };
@@ -33,6 +38,16 @@ const App = () => {
     setEditPageStatus(false);
   };
 
+  const showEditCourseForm = () => {
+    setCoursesPageStatus(true);
+    setEditPageStatus(true);
+  };
+
+  const showCreateCourseForm = () => {
+    setCoursesPageStatus(true);
+  };
+
+  // Conditions for renderind form
   const renderCourseForm = () => {
     if (coursesPageIsHidden && !isEditPage) {
       return (
@@ -51,15 +66,7 @@ const App = () => {
     return null;
   };
 
-  const showEditCourseForm = () => {
-    setCoursesPageStatus(true);
-    setEditPageStatus(true);
-  };
-
-  const showCreateCourseForm = () => {
-    setCoursesPageStatus(true);
-  };
-
+  // func for searching
   const searchCourse = (searchString) => {
     /* axios
       .get('http://localhost:3001/api/courses')
@@ -79,15 +86,21 @@ const App = () => {
     <>
       <div className="content">
         <Header />
-        <div className={coursesPageIsHidden ? 'courses-page hidden' : 'courses-page visible'}>
-          <CoursesPage
-            courses={filteredCourses.length ? filteredCourses : courses}
-            allAuthors={allAuthors}
-            showCreateCourseForm={showCreateCourseForm}
-            showEditCourseForm={showEditCourseForm}
-            searchCourse={searchCourse}
+        <Switch>
+          <Route
+            path={ROUTE.COURSES}
+            component={() => (
+              <CoursesPage
+                courses={filteredCourses.length ? filteredCourses : courses}
+                allAuthors={allAuthors}
+                showCreateCourseForm={showCreateCourseForm}
+                showEditCourseForm={showEditCourseForm}
+                searchCourse={searchCourse}
+                coursesPageIsHidden={coursesPageIsHidden}
+              />
+            )}
           />
-        </div>
+        </Switch>
         <div className={coursesPageIsHidden ? 'courses-form visible' : 'courses-form hidden'}>
           {coursesPageIsHidden ? renderCourseForm() : null}
         </div>

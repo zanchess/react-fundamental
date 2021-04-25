@@ -8,8 +8,9 @@ const CoursesPage = ({
   showCreateCourseForm,
   showEditCourseForm,
   searchCourse,
+  coursesPageIsHidden,
 }) => (
-  <div className="courses">
+  <div className={coursesPageIsHidden ? 'courses hidden' : 'courses visible'}>
     <Courses
       courses={courses}
       allAuthors={allAuthors}
