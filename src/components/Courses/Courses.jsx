@@ -8,6 +8,7 @@ const Courses = (props) => {
   const coursesList = props.courses.map((course, index) => (
     <CourseCard
       key={index}
+      id={course.id}
       title={course.title}
       start={course.creationDate}
       duration={course.duration}

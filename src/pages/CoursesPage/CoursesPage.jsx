@@ -28,7 +28,7 @@ const CoursesPage = ({
           />
         )}
       />
-      <Route path={`${ROUTE.COURSES}/:id`} component={CourseInfoPage} />
+      <Route path={`${ROUTE.COURSES}/:id`} component={() => <CourseInfoPage courses={courses} allAuthors={allAuthors} />} />
     </Switch>
   </div>
 );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './app.scss';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useParams } from 'react-router-dom';
 import Header from './components/Header/Header';
 import CoursesPage from './pages/CoursesPage/CoursesPage';
 import CreateCoursePage from './pages/CreateCoursePage/CreateCoursePage';

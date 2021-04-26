@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 
 const CourseCard = ({
-  title, start, duration, description, authors, allAuthors,
+  id, title, start, duration, description, authors, allAuthors,
 }) => {
   const authorsNameObj = authors
-    .map((id) => allAuthors.find((author) => id === author.id))
+    .map((authorId) => allAuthors.find((author) => authorId === author.id))
     .map((author) => author.name);
 
   return (
@@ -40,7 +40,7 @@ const CourseCard = ({
               </span>
             ))}
           </Card.Text>
-          <Link to="/courses/1">Show Course</Link>
+          <Link to={`/courses/${id}`}>Show Course</Link>
         </Card.Body>
       </Card>
     </>
