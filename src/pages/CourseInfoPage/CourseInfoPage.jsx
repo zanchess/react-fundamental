@@ -11,12 +11,10 @@ const CourseInfoPage = ({ allAuthors, courses }) => {
 
   useEffect(() => {
     const course = courses.find((courseItem) => courseItem.id === id);
-    setCurrentCourse(course);
+    const courseAuthors = authorsAdapter(course, allAuthors);
 
-    if (course) {
-      const courseAuthors = authorsAdapter(course, allAuthors);
-      setAuthors(courseAuthors);
-    }
+    setCurrentCourse(course);
+    setAuthors(courseAuthors);
   }, []);
 
   return (
