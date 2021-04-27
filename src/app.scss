@@ -7,4 +7,21 @@
   .hidden{
     display: none;
   }
+
+  .btn-link{
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #4e87ff;
+    color: aliceblue;
+    text-align: center;
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  .btn-link:hover{
+    text-decoration: none;
+    background-color: #84a5ef;
+    transition: all 0.26s ease;
+  }
+
 }

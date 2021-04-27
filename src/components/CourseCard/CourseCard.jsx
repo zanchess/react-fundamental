@@ -40,7 +40,7 @@ const CourseCard = ({
               </span>
             ))}
           </Card.Text>
-          <Link to={`/courses/${id}`}>Show Course</Link>
+          <Link className="btn-link" to={`/courses/${id}`}>Show Course</Link>
         </Card.Body>
       </Card>
     </>
