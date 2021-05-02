@@ -1,8 +1,10 @@
 import React from 'react';
 import './courses.scss';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import CourseCard from '../CourseCard/CourseCard';
 import Searching from '../Searching/Searching';
+import ROUTE from '../../constants/routes';
 
 const Courses = (props) => {
   const coursesList = props.courses.map((course, index) => (
@@ -23,7 +25,7 @@ const Courses = (props) => {
       <div className="courses__block">
         <div className="login-page__control">
           <Searching searchCourse={props.searchCourse} />
-          <Button onClick={props.showCreateCourseForm} className="add-btn" variant="primary">Add Course</Button>
+          <Link className="btn-link" to={`${ROUTE.COURSES}${ROUTE.ADD}`}>Add Course</Link>
         </div>
         <div className="course__block_courses">
           {coursesList}

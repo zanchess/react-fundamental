@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
 import './login-form.scss';
+import { useHistory } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({ onFormSubmit }) => {
   // reg exp for validation
-  const loginRegExp = /^[A-z]+$/;
+  const emailRegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const passwordRegExp = /^[A-z0-9]+$/;
 
   // state for login input
-  const [login, setLogin] = useState('');
-  const [invalidLoginMessage, showInvalidLoginMessage] = useState(false);
-  const [emptyLoginMessage, showEmptyLoginMessage] = useState(false);
+  const history = useHistory();
+  const [email, setEmail] = useState('');
+  const [invalidEmailMessage, showInvalidEmailMessage] = useState(false);
+  const [emptyEmailMessage, showEmptyEmailMessage] = useState(false);
 
   // state for password input
   const [password, setPassword] = useState('');
@@ -19,15 +21,15 @@ const LoginForm = () => {
 
   // handler for change event
   const handleChange = (event) => {
-    if (event.target.name === 'login') setLogin(event.target.value);
+    if (event.target.name === 'email') setEmail(event.target.value);
     if (event.target.name === 'password') setPassword(event.target.value);
   };
 
   // handler for blur event
   const handleBlur = (event) => {
-    if (event.target.name === 'login') {
-      login === '' ? showEmptyLoginMessage(true) : showEmptyLoginMessage(false);
-      !loginRegExp.test(login) && login !== '' ? showInvalidLoginMessage(true) : showInvalidLoginMessage(false);
+    if (event.target.name === 'email') {
+      email === '' ? showEmptyEmailMessage(true) : showEmptyEmailMessage(false);
+      !emailRegExp.test(email) && email !== '' ? showInvalidEmailMessage(true) : showInvalidEmailMessage(false);
     }
     if (event.target.name === 'password') {
       password === '' ? showEmptyPasswordMessage(true) : showEmptyPasswordMessage(false);
@@ -35,15 +37,24 @@ const LoginForm = () => {
     }
   };
 
+  const submitHandle = (event) => {
+    event.preventDefault();
+    onFormSubmit(email, password);
+    history.push('/courses');
+  };
+
   return (
     <>
-      <Form className="login-form">
+      <Form
+        onSubmit={submitHandle}
+        className="login-form"
+      >
         <Form.Group controlId="for">
           <Row />
-          <Form.Label>Login</Form.Label>
-          <Form.Control className={invalidLoginMessage || emptyLoginMessage ? 'login-incorrect-border' : null} value={login} onBlur={handleBlur} onChange={handleChange} name="login" type="text" placeholder="Login" />
-          <div className={invalidLoginMessage ? 'login-incorrect' : 'login-correct'}><span>Incorrect login</span></div>
-          <div className={emptyLoginMessage ? 'login-empty' : 'login-not-empty'}><span>Please enter login</span></div>
+          <Form.Label>Email</Form.Label>
+          <Form.Control className={invalidEmailMessage || emptyEmailMessage ? 'login-incorrect-border' : null} value={email} onBlur={handleBlur} onChange={handleChange} name="email" type="text" placeholder="email" />
+          <div className={invalidEmailMessage ? 'login-incorrect' : 'login-correct'}><span>Incorrect email</span></div>
+          <div className={emptyEmailMessage ? 'login-empty' : 'login-not-empty'}><span>Please enter email</span></div>
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
@@ -52,7 +63,7 @@ const LoginForm = () => {
           <div className={invalidPasswordMessage ? 'password-incorrect' : 'password-correct'}><span>Incorrect password</span></div>
           <div className={emptyPasswordMessage ? 'password-empty' : 'password-not-empty'}><span>Please enter password</span></div>
         </Form.Group>
-        <Button variant="primary" type="submit" disabled={!(login !== '' && password !== '')}>
+        <Button type="submit" variant="primary" disabled={!(email !== '' && password !== '')}>
           Sign in
         </Button>
       </Form>
