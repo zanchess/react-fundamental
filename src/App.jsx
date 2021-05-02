@@ -11,6 +11,7 @@ import CourseInfoPage from './pages/CourseInfoPage/CourseInfoPage';
 import db from './db';
 import ROUTE from './constants/routes';
 import LoginPage from './pages/Login/LoginPage';
+import RegistrationPage from './pages/Registration/RegistrationPage';
 
 const App = () => {
   // state hooks
@@ -76,7 +77,7 @@ const App = () => {
   // func for searching
   const searchCourse = (searchString) => {
     /* axios
-      .get('http://localhost:3001/api/courses')
+      .get('http://localhost:3000/api/courses')
       .then((res) => setCourses(res.data)); */
     if (searchString) {
       const searchedCourses = db.mockedCourseList
@@ -109,6 +110,7 @@ const App = () => {
 
           </Route>
           <Route exact path={ROUTE.LOGIN} component={() => <LoginPage onFormSubmit={onFormSubmit} />} />
+          <Route path={ROUTE.REGISTRATION} component={() => <RegistrationPage />} />
           <Route
             path={ROUTE.COURSES}
             component={() => (

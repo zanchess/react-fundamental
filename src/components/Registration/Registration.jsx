@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
-import './login-form.scss';
-import { Link, useHistory } from 'react-router-dom';
+import './registration.scss';
+import { Link } from 'react-router-dom';
 
-const LoginForm = ({ onFormSubmit }) => {
+const RegistrationForm = () => {
   // reg exp for validation
-  const emailRegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  const emailRegExp = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const passwordRegExp = /^[A-z0-9]+$/;
 
   // state for login input
-  const history = useHistory();
   const [email, setEmail] = useState('');
   const [invalidEmailMessage, showInvalidEmailMessage] = useState(false);
   const [emptyEmailMessage, showEmptyEmailMessage] = useState(false);
@@ -37,20 +36,13 @@ const LoginForm = ({ onFormSubmit }) => {
     }
   };
 
-  const submitHandle = (event) => {
-    event.preventDefault();
-    onFormSubmit(email, password);
-    history.push('/courses');
-  };
-
   return (
     <>
+      <h2>Registration</h2>
       <Form
-        onSubmit={submitHandle}
         className="login-form"
       >
         <Form.Group controlId="for">
-          <Row />
           <Form.Label>Email</Form.Label>
           <Form.Control className={invalidEmailMessage || emptyEmailMessage ? 'login-incorrect-border' : null} value={email} onBlur={handleBlur} onChange={handleChange} name="email" type="text" placeholder="email" />
           <div className={invalidEmailMessage ? 'login-incorrect' : 'login-correct'}><span>Incorrect email</span></div>
@@ -64,19 +56,18 @@ const LoginForm = ({ onFormSubmit }) => {
           <div className={emptyPasswordMessage ? 'password-empty' : 'password-not-empty'}><span>Please enter password</span></div>
         </Form.Group>
         <Button type="submit" variant="primary" disabled={!(email !== '' && password !== '')}>
-          Sign in
+          Registration
         </Button>
-        <Row className="registr">
-          <p>
-            If you don't have account you can:
-            {' '}
-            <Link to="/registration">Registration</Link>
-          </p>
-
-        </Row>
       </Form>
+      <Row className="login">
+        <p>
+          If you have account you can:
+          {' '}
+          <Link to="/login">Login</Link>
+        </p>
+      </Row>
     </>
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;
