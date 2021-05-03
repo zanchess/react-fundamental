@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
 import './registration.scss';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ROUTE from '../../constants/routes';
+import LoginForm from '../LoginForm/LoginForm';
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ registerSubmit }) => {
+  const history = useHistory();
   // reg exp for validation
   const emailRegExp = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const passwordRegExp = /^[A-z0-9]+$/;
+  const nameRegExp = /^[A-z]+$/;
 
-  // state for login input
+  // state for name input
+  const [name, setName] = useState('');
+  const [invalidNameMessage, showInvalidNameMessage] = useState(false);
+  const [emptyNameMessage, showEmptyNameMessage] = useState(false);
+
+  // state for email input
   const [email, setEmail] = useState('');
   const [invalidEmailMessage, showInvalidEmailMessage] = useState(false);
   const [emptyEmailMessage, showEmptyEmailMessage] = useState(false);
@@ -23,10 +32,15 @@ const RegistrationForm = () => {
   const handleChange = (event) => {
     if (event.target.name === 'email') setEmail(event.target.value);
     if (event.target.name === 'password') setPassword(event.target.value);
+    if (event.target.name === 'name') setName(event.target.value);
   };
 
   // handler for blur event
   const handleBlur = (event) => {
+    if (event.target.name === 'name') {
+      name === '' ? showEmptyNameMessage(true) : showEmptyNameMessage(false);
+      !nameRegExp.test(name) && name !== '' ? showInvalidNameMessage(true) : showInvalidNameMessage(false);
+    }
     if (event.target.name === 'email') {
       email === '' ? showEmptyEmailMessage(true) : showEmptyEmailMessage(false);
       !emailRegExp.test(email) && email !== '' ? showInvalidEmailMessage(true) : showInvalidEmailMessage(false);
@@ -37,12 +51,23 @@ const RegistrationForm = () => {
     }
   };
 
+  const onSubmitHandle = (event) => {
+    event.preventDefault();
+    registerSubmit(name, email, password);
+    history.push(`${ROUTE.LOGIN}`);
+  };
+
   return (
     <>
-      <h2>Registration</h2>
-      <Form
-        className="login-form"
-      >
+      <h2 className="reg__head">Registration</h2>
+      <Form className="login-form" onSubmit={onSubmitHandle}>
+        <Form.Group controlId="for">
+          <Form.Label>Name</Form.Label>
+          <Form.Control className={invalidNameMessage || emptyNameMessage ? 'login-incorrect-border' : null} value={name} onBlur={handleBlur} onChange={handleChange} name="name" type="text" placeholder="name" />
+          <div className={invalidNameMessage ? 'login-incorrect' : 'login-correct'}><span>Incorrect name</span></div>
+          <div className={emptyNameMessage ? 'login-empty' : 'login-not-empty'}><span>Please enter name</span></div>
+        </Form.Group>
+
         <Form.Group controlId="for">
           <Form.Label>Email</Form.Label>
           <Form.Control className={invalidEmailMessage || emptyEmailMessage ? 'login-incorrect-border' : null} value={email} onBlur={handleBlur} onChange={handleChange} name="email" type="text" placeholder="email" />
@@ -69,6 +94,10 @@ const RegistrationForm = () => {
       </Row>
     </>
   );
+};
+
+LoginForm.propTypes = {
+  registerSubmit: PropTypes.func.isRequired,
 };
 
 export default RegistrationForm;

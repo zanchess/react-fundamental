@@ -24,15 +24,12 @@ const App = () => {
 
   // Lifecycle hooks
   useEffect(() => {
-    /* axios
-      .get('http://localhost:3001/api/authors')
-      .then((res) => setAllAuthors(res.data));
-    axios
-      .get('http://localhost:3001/api/courses')
-      .then((res) => setCourses(res.data)); */
-    console.log(localStorage.getItem('token'));
-    setAllAuthors(db.mockedAuthorsList);
-    setCourses(db.mockedCourseList);
+    axios.get('http://localhost:3000/authors/all')
+      .then((res) => setAllAuthors(res.data.result));
+    axios.get('http://localhost:3000/courses/all')
+      .then((res) => setCourses(res.data.result));
+    /*    setAllAuthors(db.mockedAuthorsList);
+    setCourses(db.mockedCourseList); */
   }, []);
 
   const onFormSubmit = (email, password) => {
@@ -76,18 +73,33 @@ const App = () => {
 
   // func for searching
   const searchCourse = (searchString) => {
-    /* axios
-      .get('http://localhost:3000/api/courses')
-      .then((res) => setCourses(res.data)); */
     if (searchString) {
-      const searchedCourses = db.mockedCourseList
+      const searchedCourses = [...courses]
         .filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase())
           || course.title.toLowerCase().includes(searchString.toLowerCase()));
       setfilteredCourses(searchedCourses);
     } else {
       setfilteredCourses([]);
-      setCourses(db.mockedCourseList);
     }
+  };
+
+  const registerSubmit = (name, email, password) => {
+    const body = {
+      name,
+      email,
+      password,
+    };
+    console.log(body);
+
+    axios.post('http://localhost:3000/register', {
+      ...body,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -110,7 +122,7 @@ const App = () => {
 
           </Route>
           <Route exact path={ROUTE.LOGIN} component={() => <LoginPage onFormSubmit={onFormSubmit} />} />
-          <Route path={ROUTE.REGISTRATION} component={() => <RegistrationPage />} />
+          <Route path={ROUTE.REGISTRATION} component={() => <RegistrationPage registerSubmit={registerSubmit} />} />
           <Route
             path={ROUTE.COURSES}
             component={() => (
