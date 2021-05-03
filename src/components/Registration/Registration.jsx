@@ -4,7 +4,6 @@ import './registration.scss';
 import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ROUTE from '../../constants/routes';
-import LoginForm from '../LoginForm/LoginForm';
 
 const RegistrationForm = ({ registerSubmit }) => {
   const history = useHistory();
@@ -96,7 +95,7 @@ const RegistrationForm = ({ registerSubmit }) => {
   );
 };
 
-LoginForm.propTypes = {
+RegistrationForm.propTypes = {
   registerSubmit: PropTypes.func.isRequired,
 };
 

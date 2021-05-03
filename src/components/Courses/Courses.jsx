@@ -25,7 +25,7 @@ const Courses = (props) => {
       <div className="courses__block">
         <div className="login-page__control">
           <Searching searchCourse={props.searchCourse} />
-          <Link className="btn-link" to={`${ROUTE.COURSES}${ROUTE.ADD}`}>Add Course</Link>
+          <Link className="btn-link add-course" to={`${ROUTE.COURSES}${ROUTE.ADD}`}>Add Course</Link>
         </div>
         <div className="course__block_courses">
           {coursesList}

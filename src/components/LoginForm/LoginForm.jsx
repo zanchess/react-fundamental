@@ -7,7 +7,7 @@ import ROUTE from '../../constants/routes';
 
 const LoginForm = ({ onFormSubmit }) => {
   // reg exp for validation
-  const emailRegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  const emailRegExp = /^[a-zA-Z0-9]+([-._][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*\.[a-zA-Z]{2,7}$/;
   const passwordRegExp = /^[A-z0-9]+$/;
 
   // state for login input
@@ -70,7 +70,7 @@ const LoginForm = ({ onFormSubmit }) => {
         </Button>
         <Row className="registr">
           <p>
-            If you don't have account you can:
+            If you don&apos;t have account you can:
             {' '}
             <Link to="/registration">Registration</Link>
           </p>

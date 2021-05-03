@@ -3,12 +3,12 @@ import {
   Form, Button, Col,
 } from 'react-bootstrap';
 import './course-info-from.scss';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import getTimeFromMins from '../../utils/get-time-from-mins';
-import CourseCard from '../CourseCard/CourseCard';
 
-const CourseInfoForm = ({ hideForm }) => {
+const CourseInfoForm = () => {
   // input values
+  const history = useHistory();
   const [titleValue, setTitleValue] = useState('');
   const [descriptionValue, setDescriptionValue] = useState('');
   const [startDateValue, setStartDateValue] = useState('');
@@ -90,16 +90,12 @@ const CourseInfoForm = ({ hideForm }) => {
         <Button className="btn-group__save" variant="primary" type="submit">
           Save
         </Button>
-        <Button onClick={hideForm} className="btn-group__cancel" variant="primary" type="submit">
+        <Button onClick={() => history.push('/courses')} className="btn-group__cancel" variant="primary" type="submit">
           Cancel
         </Button>
       </div>
     </>
   );
-};
-
-CourseInfoForm.propTypes = {
-  hideForm: PropTypes.func.isRequired,
 };
 
 export default CourseInfoForm;
