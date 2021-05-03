@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
 import './registration.scss';
 import { Link } from 'react-router-dom';
+import ROUTE from '../../constants/routes';
 
 const RegistrationForm = () => {
   // reg exp for validation
@@ -63,7 +64,7 @@ const RegistrationForm = () => {
         <p>
           If you have account you can:
           {' '}
-          <Link to="/login">Login</Link>
+          <Link to={`${ROUTE.LOGIN}`}>Login</Link>
         </p>
       </Row>
     </>

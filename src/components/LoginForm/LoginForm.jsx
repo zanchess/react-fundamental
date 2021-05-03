@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
 import './login-form.scss';
 import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import ROUTE from '../../constants/routes';
 
 const LoginForm = ({ onFormSubmit }) => {
   // reg exp for validation
@@ -40,7 +42,7 @@ const LoginForm = ({ onFormSubmit }) => {
   const submitHandle = (event) => {
     event.preventDefault();
     onFormSubmit(email, password);
-    history.push('/courses');
+    history.push(`${ROUTE.COURSES}`);
   };
 
   return (
@@ -77,6 +79,10 @@ const LoginForm = ({ onFormSubmit }) => {
       </Form>
     </>
   );
+};
+
+LoginForm.propTypes = {
+  onFormSubmit: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

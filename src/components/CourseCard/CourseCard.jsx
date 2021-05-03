@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import './course-card.scss';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 
 const CourseCard = ({
@@ -45,6 +46,16 @@ const CourseCard = ({
       </Card>
     </>
   );
+};
+
+CourseCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  start: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+  authors: PropTypes.instanceOf(Array).isRequired,
+  allAuthors: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default CourseCard;

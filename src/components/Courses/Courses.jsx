@@ -1,7 +1,7 @@
 import React from 'react';
 import './courses.scss';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CourseCard from '../CourseCard/CourseCard';
 import Searching from '../Searching/Searching';
 import ROUTE from '../../constants/routes';
@@ -33,6 +33,17 @@ const Courses = (props) => {
       </div>
     </div>
   );
+};
+
+CourseCard.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  start: PropTypes.string,
+  duration: PropTypes.number,
+  description: PropTypes.string,
+  authors: PropTypes.instanceOf(Array),
+  allAuthors: PropTypes.instanceOf(Array),
+  showEditCourseForm: PropTypes.func,
 };
 
 export default Courses;

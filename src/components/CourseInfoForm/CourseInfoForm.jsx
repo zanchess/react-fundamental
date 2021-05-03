@@ -3,9 +3,11 @@ import {
   Form, Button, Col,
 } from 'react-bootstrap';
 import './course-info-from.scss';
+import PropTypes from 'prop-types';
 import getTimeFromMins from '../../utils/get-time-from-mins';
+import CourseCard from '../CourseCard/CourseCard';
 
-const LoginForm = ({ hideForm }) => {
+const CourseInfoForm = ({ hideForm }) => {
   // input values
   const [titleValue, setTitleValue] = useState('');
   const [descriptionValue, setDescriptionValue] = useState('');
@@ -96,4 +98,8 @@ const LoginForm = ({ hideForm }) => {
   );
 };
 
-export default LoginForm;
+CourseInfoForm.propTypes = {
+  hideForm: PropTypes.func.isRequired,
+};
+
+export default CourseInfoForm;
