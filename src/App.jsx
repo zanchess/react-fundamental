@@ -10,11 +10,12 @@ import ROUTE from './constants/routes';
 import LoginPage from './pages/Login/LoginPage';
 import RegistrationPage from './pages/Registration/RegistrationPage';
 import { logIn, logOut } from './store/user/actionCreators';
+import { getCourses } from './store/courses/actionCreators';
+import { getAuthors } from './store/authors/actionCreators';
 
 const App = (props) => {
   console.log(props);
   // state hooks
-  const [courses, setCourses] = useState([]);
   const [allAuthors, setAllAuthors] = useState([]);
   const [coursesPageIsHidden, setCoursesPageStatus] = useState(false);
   const [filteredCourses, setfilteredCourses] = useState([]);
@@ -25,9 +26,13 @@ const App = (props) => {
   // Lifecycle hooks
   useEffect(() => {
     axios.get('http://localhost:3000/authors/all')
-      .then((res) => setAllAuthors(res.data.result));
+      .then((res) => {
+        props.getAuthors(res.data.result);
+      });
     axios.get('http://localhost:3000/courses/all')
-      .then((res) => setCourses(res.data.result));
+      .then((res) => {
+        props.getCourses(res.data.result);
+      });
   }, []);
 
   const onFormSubmit = (email, password) => {
@@ -131,8 +136,8 @@ const App = (props) => {
             path={ROUTE.COURSES}
             component={() => (
               <CoursesPage
-                courses={filteredCourses.length ? filteredCourses : courses}
-                allAuthors={allAuthors}
+                courses={filteredCourses.length ? filteredCourses : props.courses}
+                allAuthors={props.authors}
                 showCreateCourseForm={showCreateCourseForm}
                 showEditCourseForm={showEditCourseForm}
                 searchCourse={searchCourse}
@@ -147,14 +152,19 @@ const App = (props) => {
 };
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     user: state.user,
+    courses: state.courses.courses,
+    authors: state.authors.authors,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     logIn: (user) => dispatch(logIn(user)),
+    getCourses: (courses) => dispatch(getCourses(courses)),
+    getAuthors: (authors) => dispatch(getAuthors(authors)),
   };
 }
 
