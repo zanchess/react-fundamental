@@ -10,13 +10,16 @@ const initialState = {
 };
 
 function user(state = initialState, action) {
+  console.log(action);
   switch (action.type) {
     case LOG_IN:
-      console.log(action);
       return {
-        user: {
-          ...action.user,
-        },
+        ...action.user,
+      };
+    case LOG_OUT:
+      console.log(LOG_OUT);
+      return {
+        ...action.emptyUser,
       };
     default:
       break;

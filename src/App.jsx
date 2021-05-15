@@ -9,7 +9,7 @@ import CoursesPage from './pages/CoursesPage/CoursesPage';
 import ROUTE from './constants/routes';
 import LoginPage from './pages/Login/LoginPage';
 import RegistrationPage from './pages/Registration/RegistrationPage';
-import { logIn } from './store/user/actionCreators';
+import { logIn, logOut } from './store/user/actionCreators';
 
 const App = (props) => {
   console.log(props);
@@ -24,7 +24,6 @@ const App = (props) => {
 
   // Lifecycle hooks
   useEffect(() => {
-    localStorage.getItem('token') ? setIsAuth(true) : setIsAuth(false);
     axios.get('http://localhost:3000/authors/all')
       .then((res) => setAllAuthors(res.data.result));
     axios.get('http://localhost:3000/courses/all')
@@ -101,7 +100,7 @@ const App = (props) => {
         <Header />
         <Switch>
           <Route exact name="app" path="/" handler={App}>
-            {isAuth || localStorage.getItem('token') ? (
+            {props.isAuth || localStorage.getItem('token') ? (
               <>
                 <Redirect from="/" to="courses" />
                 <Route path="/courses" name="courses" handler={CoursesPage} />
