@@ -1,18 +1,14 @@
 import { LOG_IN, LOG_OUT } from './actionTypes';
 
-function logIn() {
+export function logIn(user) {
   return {
     type: LOG_IN,
+    user,
   };
 }
 
-function logOut() {
+export function logOut() {
   return {
     type: LOG_OUT,
   };
 }
-
-export default {
-  logIn,
-  logOut,
-};

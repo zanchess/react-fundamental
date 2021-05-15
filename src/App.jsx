@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './app.scss';
 import { Route, Switch } from 'react-router-dom';
-import { Redirect } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import Header from './components/Header/Header';
 import CoursesPage from './pages/CoursesPage/CoursesPage';
 import ROUTE from './constants/routes';
 import LoginPage from './pages/Login/LoginPage';
 import RegistrationPage from './pages/Registration/RegistrationPage';
+import { logIn } from './store/user/actionCreators';
 
-const App = () => {
+const App = (props) => {
+  console.log(props);
   // state hooks
   const [courses, setCourses] = useState([]);
   const [allAuthors, setAllAuthors] = useState([]);
@@ -17,14 +20,15 @@ const App = () => {
   const [filteredCourses, setfilteredCourses] = useState([]);
   const [isAuth, setIsAuth] = useState(false);
 
+  const history = useHistory();
+
   // Lifecycle hooks
   useEffect(() => {
+    localStorage.getItem('token') ? setIsAuth(true) : setIsAuth(false);
     axios.get('http://localhost:3000/authors/all')
       .then((res) => setAllAuthors(res.data.result));
     axios.get('http://localhost:3000/courses/all')
       .then((res) => setCourses(res.data.result));
-    /*    setAllAuthors(db.mockedAuthorsList);
-    setCourses(db.mockedCourseList); */
   }, []);
 
   const onFormSubmit = (email, password) => {
@@ -37,8 +41,17 @@ const App = () => {
       ...body,
     })
       .then((response) => {
+        console.log(response);
+        setIsAuth(true);
         localStorage.setItem('token', response.data.result);
-      }).then(setIsAuth(true))
+        history.push(`${ROUTE.COURSES}`);
+        props.logIn({
+          isAuth: true,
+          name: response.data.user.name,
+          email: response.data.user.email,
+          token: response.data.result,
+        });
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -104,7 +117,12 @@ const App = () => {
           <Route
             exact
             path={ROUTE.LOGIN}
-            component={() => <LoginPage onFormSubmit={onFormSubmit} />}
+            component={() => (
+              <LoginPage
+                isAuth={isAuth}
+                onFormSubmit={onFormSubmit}
+              />
+            )}
           />
           <Route
             path={ROUTE.REGISTRATION}
@@ -129,4 +147,16 @@ const App = () => {
   );
 };
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logIn: (user) => dispatch(logIn(user)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
