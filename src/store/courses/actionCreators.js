@@ -1,9 +1,9 @@
 import { ADD_COURSE, GET_COURSES } from './actionTypes';
 
-export function addCourse(courseInfo) {
+export function addCourse(newCourse) {
   return {
     type: ADD_COURSE,
-    courseInfo,
+    newCourse,
   };
 }
 

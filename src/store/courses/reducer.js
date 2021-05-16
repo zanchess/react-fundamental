@@ -10,6 +10,11 @@ function courses(state = initialState, action) {
       return {
         courses: [...action.courses],
       };
+    case ADD_COURSE:
+      console.log(state);
+      return {
+        courses: [...state.courses, action.newCourse],
+      };
     default:
       break;
   }
