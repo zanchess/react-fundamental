@@ -8,7 +8,6 @@ export function addCourse(courseInfo) {
 }
 
 export function getCourses(courses) {
-  console.log(courses);
   return {
     type: GET_COURSES,
     courses,

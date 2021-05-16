@@ -8,7 +8,6 @@ export function addAuthor(authorInfo) {
 }
 
 export function getAuthors(authors) {
-  console.log(authors);
   return {
     type: GET_AUTHORS,
     authors,

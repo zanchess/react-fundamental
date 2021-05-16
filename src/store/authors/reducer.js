@@ -1,7 +1,7 @@
 import { ADD_AUTHOR, GET_AUTHORS } from './actionTypes';
 
 const initialState = {
-  courses: [],
+  authors: [],
 };
 
 function authors(state = initialState, action) {
