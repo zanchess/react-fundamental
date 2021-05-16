@@ -27,7 +27,7 @@ const Header = (props) => {
     <>
       <nav className="nav">
         <h1>React foundation</h1>
-        <div className={`nav__login ${props.user.isAuth ? 'show_log-out' : 'hide_log-out'}`}>
+        <div className={`nav__login ${localStorage.getItem('token') ? 'show_log-out' : 'hide_log-out'}`}>
           <span className="nav__login-name ">Login</span>
           <Button onClick={logoOutHandle} className="nav__logout-btn" variant="link">Log out</Button>
         </div>

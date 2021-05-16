@@ -1,4 +1,4 @@
-import { ADD_COURSE, GET_COURSES } from './actionTypes';
+import { ADD_COURSE, DELETE_COURSE, GET_COURSES } from './actionTypes';
 
 export function addCourse(newCourse) {
   return {
@@ -10,6 +10,13 @@ export function addCourse(newCourse) {
 export function getCourses(courses) {
   return {
     type: GET_COURSES,
+    courses,
+  };
+}
+
+export function deleteCourse(courses) {
+  return {
+    type: DELETE_COURSE,
     courses,
   };
 }

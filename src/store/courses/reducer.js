@@ -1,4 +1,4 @@
-import { ADD_COURSE, GET_COURSES } from './actionTypes';
+import { ADD_COURSE, GET_COURSES, DELETE_COURSE } from './actionTypes';
 
 const initialState = {
   courses: [],
@@ -11,9 +11,12 @@ function courses(state = initialState, action) {
         courses: [...action.courses],
       };
     case ADD_COURSE:
-      console.log(state);
       return {
         courses: [...state.courses, action.newCourse],
+      };
+    case DELETE_COURSE:
+      return {
+        courses: [...action.courses],
       };
     default:
       break;
