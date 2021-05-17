@@ -1,11 +1,4 @@
-import { ADD_AUTHOR, GET_AUTHORS } from './actionTypes';
-
-export function addAuthor(authorInfo) {
-  return {
-    type: ADD_AUTHOR,
-    authorInfo,
-  };
-}
+import { GET_AUTHORS } from './actionTypes';
 
 export function getAuthors(authors) {
   return {

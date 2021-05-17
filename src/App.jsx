@@ -9,14 +9,12 @@ import CoursesPage from './pages/CoursesPage/CoursesPage';
 import ROUTE from './constants/routes';
 import LoginPage from './pages/Login/LoginPage';
 import RegistrationPage from './pages/Registration/RegistrationPage';
-import { logIn, logOut } from './store/user/actionCreators';
+import { logIn } from './store/user/actionCreators';
 import { getCourses } from './store/courses/actionCreators';
 import { getAuthors } from './store/authors/actionCreators';
 
 const App = (props) => {
-  console.log(props);
   // state hooks
-  const [allAuthors, setAllAuthors] = useState([]);
   const [coursesPageIsHidden, setCoursesPageStatus] = useState(false);
   const [filteredCourses, setfilteredCourses] = useState([]);
   const [isAuth, setIsAuth] = useState(false);
@@ -45,7 +43,6 @@ const App = (props) => {
       ...body,
     })
       .then((response) => {
-        console.log(response);
         setIsAuth(true);
         localStorage.setItem('token', response.data.result);
         history.push(`${ROUTE.COURSES}`);
@@ -72,7 +69,7 @@ const App = (props) => {
   // func for searching
   const searchCourse = (searchString) => {
     if (searchString) {
-      const searchedCourses = [...courses]
+      const searchedCourses = [...props.courses]
         .filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase())
           || course.title.toLowerCase().includes(searchString.toLowerCase()));
       setfilteredCourses(searchedCourses);
@@ -152,7 +149,6 @@ const App = (props) => {
 };
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     user: state.user,
     courses: state.courses.courses,

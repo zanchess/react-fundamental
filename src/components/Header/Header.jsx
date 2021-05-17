@@ -8,10 +8,8 @@ import { logOut } from '../../store/user/actionCreators';
 
 const Header = (props) => {
   const history = useHistory();
-  console.log(props);
 
   const logoOutHandle = () => {
-    console.log(props);
     props.logOut({
       isAuth: false,
       name: '',

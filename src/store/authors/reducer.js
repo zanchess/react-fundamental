@@ -1,4 +1,4 @@
-import { ADD_AUTHOR, GET_AUTHORS } from './actionTypes';
+import { GET_AUTHORS } from './actionTypes';
 
 const initialState = {
   authors: [],

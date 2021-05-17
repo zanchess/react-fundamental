@@ -7,7 +7,6 @@ import Searching from '../Searching/Searching';
 import ROUTE from '../../constants/routes';
 
 const Courses = (props) => {
-  console.log(props);
   const coursesList = props.courses.map((course, index) => (
     <CourseCard
       key={index}

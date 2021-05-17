@@ -19,6 +19,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'import/prefer-default-export': 'off',
     'react/jsx-props-no-spreading': 0,
     'no-underscore-dangle': 0,
     'linebreak-style': 0,

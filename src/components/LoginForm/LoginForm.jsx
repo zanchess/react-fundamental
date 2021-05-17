@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
 import './login-form.scss';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ROUTE from '../../constants/routes';
 
-const LoginForm = ({ isAuth, onFormSubmit }) => {
+const LoginForm = ({ onFormSubmit }) => {
   // reg exp for validation
   const emailRegExp = /^[a-zA-Z0-9]+([-._][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*\.[a-zA-Z]{2,7}$/;
   const passwordRegExp = /^[A-z0-9]+$/;

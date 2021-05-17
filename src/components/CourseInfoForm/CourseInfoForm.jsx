@@ -104,11 +104,12 @@ const CourseInfoForm = (props) => {
           <Col className="select-authors" lg={6}>
             <span>List of Authors:</span>
             <div>
-              {props.authors.map((author) => (
+              {props.authors.map((author, i) => (
                 <SelectAuthor
                   selectAuthorHandle={selectAuthorHandle}
                   selectedAuthors={selectedAuthors}
                   author={author.name}
+                  key={i}
                 />
               ))}
             </div>
@@ -118,10 +119,11 @@ const CourseInfoForm = (props) => {
               Selected Authors:
             </span>
             <div>
-              {selectedAuthors.map((author) => (
+              {selectedAuthors.map((author, i) => (
                 <SelectedAuthors
                   deleteAuthorHandle={deleteAuthorHandle}
                   author={author.name}
+                  key={i}
                 />
               ))}
             </div>

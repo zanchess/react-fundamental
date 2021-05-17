@@ -8,7 +8,7 @@ import getTimeFromMins from '../../utils/get-time-from-mins';
 import { deleteCourse } from '../../store/courses/actionCreators';
 
 const CourseCard = ({
-  id, title, start, duration, description, authors, allAuthors, courses, deleteCourse,
+  id, title, start, duration, description, authors, allAuthors, courses, removeCourse,
 }) => {
   const authorsNameObj = authors
     .map((authorId) => allAuthors.find((author) => authorId === author.id))
@@ -19,7 +19,7 @@ const CourseCard = ({
     const i = courses.findIndex((author) => author.id === event.target.name);
     allCourses.splice(i, 1);
 
-    deleteCourse(allCourses);
+    removeCourse(allCourses);
   };
 
   return (
@@ -81,7 +81,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteCourse: (id) => dispatch(deleteCourse(id)),
+    removeCourse: (id) => dispatch(deleteCourse(id)),
   };
 }
 
