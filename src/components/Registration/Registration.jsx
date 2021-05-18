@@ -65,7 +65,7 @@ const RegistrationForm = () => {
       .catch((error) => {
         console.log(error);
       });
-    history.push(`${ROUTE.LOGIN}`);
+    history.push(ROUTE.LOGIN);
   };
 
   return (
@@ -105,10 +105,6 @@ const RegistrationForm = () => {
       </Row>
     </>
   );
-};
-
-RegistrationForm.propTypes = {
-  registerSubmit: PropTypes.func.isRequired,
 };
 
 export default RegistrationForm;
