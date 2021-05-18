@@ -59,7 +59,7 @@ const CourseInfoForm = (props) => {
     };
 
     dispatch(addCourse(newCourse));
-    history.push(`${ROUTE.COURSES}`);
+    history.push(ROUTE.COURSES);
     console.log(newCourse);
   };
 
