@@ -13,7 +13,7 @@ import SelectedAuthors from '../SelectedAuthor/SelectedAuthors';
 import ROUTE from '../../constants/routes';
 
 const CourseInfoForm = (props) => {
-  const authors = useSelector((state) => state.authors.authors);
+  const authors = useSelector((state) => state.authorsReducer.authors);
   const dispatch = useDispatch();
 
   // input values

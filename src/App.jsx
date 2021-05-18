@@ -13,10 +13,10 @@ import { logIn } from './store/user/actionCreators';
 import { setCourses } from './store/courses/actionCreators';
 import { setAuthors } from './store/authors/actionCreators';
 
-const App = (props) => {
-  const authors = useSelector((state) => state.authors.authors);
-  const courses = useSelector((state) => state.courses.courses);
-  const isAuth = useSelector((state) => state.user.isAuth);
+const App = () => {
+  const authors = useSelector((state) => state.authorsReducer.authors);
+  const courses = useSelector((state) => state.coursesReducer.courses);
+  const isAuth = useSelector((state) => state.userReducer.isAuth);
   const dispatch = useDispatch();
 
   // state hooks

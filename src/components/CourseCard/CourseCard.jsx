@@ -10,7 +10,7 @@ import { deleteCourse } from '../../store/courses/actionCreators';
 const CourseCard = ({
   id, title, start, duration, description, authors, allAuthors,
 }) => {
-  const courses = useSelector((state) => state.courses.courses);
+  const courses = useSelector((state) => state.coursesReducer.courses);
   const dispatch = useDispatch();
 
   const authorsNameObj = authors
