@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
 import './registration.scss';
 import { Link, useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import ROUTE from '../../constants/routes';
 
@@ -100,7 +99,7 @@ const RegistrationForm = () => {
         <p>
           If you have account you can:
           {' '}
-          <Link to={`${ROUTE.LOGIN}`}>Login</Link>
+          <Link to={ROUTE.LOGIN}>Login</Link>
         </p>
       </Row>
     </>
