@@ -3,7 +3,7 @@ import {
   Form, Button, Col, Row,
 } from 'react-bootstrap';
 import './course-info-from.scss';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import getTimeFromMins from '../../utils/get-time-from-mins';
@@ -136,9 +136,8 @@ const CourseInfoForm = (props) => {
           <Button className="btn-group__save" variant="primary" type="submit">
             Save
           </Button>
-          <Button onClick={() => history.push('/courses')} className="btn-group__cancel" variant="primary">
-            Cancel
-          </Button>
+          <Link />
+          <Link className="course-info-page__back btn-link" to={ROUTE.COURSES}>Cancel</Link>
         </div>
       </Form>
     </>
