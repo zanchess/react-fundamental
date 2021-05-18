@@ -7,7 +7,7 @@ export function addCourse(newCourse) {
   };
 }
 
-export function getCourses(courses) {
+export function setCourses(courses) {
   return {
     type: GET_COURSES,
     courses,

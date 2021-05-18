@@ -3,21 +3,25 @@ import './app.scss';
 import { Route, Switch } from 'react-router-dom';
 import { Redirect, useHistory } from 'react-router';
 import axios from 'axios';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import Header from './components/Header/Header';
 import CoursesPage from './pages/CoursesPage/CoursesPage';
 import ROUTE from './constants/routes';
 import LoginPage from './pages/Login/LoginPage';
 import RegistrationPage from './pages/Registration/RegistrationPage';
 import { logIn } from './store/user/actionCreators';
-import { getCourses } from './store/courses/actionCreators';
-import { getAuthors } from './store/authors/actionCreators';
+import { setCourses } from './store/courses/actionCreators';
+import { setAuthors } from './store/authors/actionCreators';
 
 const App = (props) => {
+  const authors = useSelector((state) => state.authors.authors);
+  const courses = useSelector((state) => state.courses.courses);
+  const isAuth = useSelector((state) => state.user.isAuth);
+  const dispatch = useDispatch();
+
   // state hooks
   const [coursesPageIsHidden, setCoursesPageStatus] = useState(false);
   const [filteredCourses, setfilteredCourses] = useState([]);
-  const [isAuth, setIsAuth] = useState(false);
 
   const history = useHistory();
 
@@ -25,11 +29,11 @@ const App = (props) => {
   useEffect(() => {
     axios.get('http://localhost:3000/authors/all')
       .then((res) => {
-        props.getAuthors(res.data.result);
+        dispatch(setAuthors(res.data.result));
       });
     axios.get('http://localhost:3000/courses/all')
       .then((res) => {
-        props.getCourses(res.data.result);
+        dispatch(setCourses(res.data.result));
       });
   }, []);
 
@@ -43,15 +47,14 @@ const App = (props) => {
       ...body,
     })
       .then((response) => {
-        setIsAuth(true);
         localStorage.setItem('token', response.data.result);
         history.push(`${ROUTE.COURSES}`);
-        props.logIn({
+        dispatch(logIn({
           isAuth: true,
           name: response.data.user.name,
           email: response.data.user.email,
           token: response.data.result,
-        });
+        }));
       })
       .catch((error) => {
         console.log(error);
@@ -69,7 +72,7 @@ const App = (props) => {
   // func for searching
   const searchCourse = (searchString) => {
     if (searchString) {
-      const searchedCourses = [...props.courses]
+      const searchedCourses = [...courses]
         .filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase())
           || course.title.toLowerCase().includes(searchString.toLowerCase()));
       setfilteredCourses(searchedCourses);
@@ -102,7 +105,7 @@ const App = (props) => {
         <Header />
         <Switch>
           <Route exact name="app" path="/" handler={App}>
-            {props.isAuth || localStorage.getItem('token') ? (
+            {isAuth || localStorage.getItem('token') ? (
               <>
                 <Redirect from="/" to="courses" />
                 <Route path="/courses" name="courses" handler={CoursesPage} />
@@ -133,8 +136,8 @@ const App = (props) => {
             path={ROUTE.COURSES}
             component={() => (
               <CoursesPage
-                courses={filteredCourses.length ? filteredCourses : props.courses}
-                allAuthors={props.authors}
+                courses={filteredCourses.length ? filteredCourses : courses}
+                allAuthors={authors}
                 showCreateCourseForm={showCreateCourseForm}
                 showEditCourseForm={showEditCourseForm}
                 searchCourse={searchCourse}
@@ -148,20 +151,4 @@ const App = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    courses: state.courses.courses,
-    authors: state.authors.authors,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    logIn: (user) => dispatch(logIn(user)),
-    getCourses: (courses) => dispatch(getCourses(courses)),
-    getAuthors: (authors) => dispatch(getAuthors(authors)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

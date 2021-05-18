@@ -12,13 +12,18 @@ const initialState = {
 function user(state = initialState, action) {
   switch (action.type) {
     case LOG_IN:
+      console.log(action);
       return {
-        ...action.user,
+        user: {
+          ...action.user,
+        },
       };
     case LOG_OUT:
       console.log(LOG_OUT);
       return {
-        ...action.emptyUser,
+        user: {
+          ...action.emptyUser,
+        },
       };
     default:
       break;

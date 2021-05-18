@@ -1,6 +1,6 @@
 import { GET_AUTHORS } from './actionTypes';
 
-export function getAuthors(authors) {
+export function setAuthors(authors) {
   return {
     type: GET_AUTHORS,
     authors,
