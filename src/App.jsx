@@ -70,22 +70,6 @@ const App = () => {
     }
   };
 
-  const registerSubmit = (name, email, password) => {
-    const body = {
-      name,
-      email,
-      password,
-    };
-
-    axios.post('http://localhost:3000/register', body)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   return (
     <>
       <div className="content">
@@ -117,7 +101,7 @@ const App = () => {
           />
           <Route
             path={ROUTE.REGISTRATION}
-            component={() => <RegistrationPage registerSubmit={registerSubmit} />}
+            component={() => <RegistrationPage />}
           />
           <Route
             path={ROUTE.COURSES}

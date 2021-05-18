@@ -3,9 +3,10 @@ import { Form, Button, Row } from 'react-bootstrap';
 import './registration.scss';
 import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import ROUTE from '../../constants/routes';
 
-const RegistrationForm = ({ registerSubmit }) => {
+const RegistrationForm = () => {
   const history = useHistory();
   // reg exp for validation
   const emailRegExp = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -52,7 +53,18 @@ const RegistrationForm = ({ registerSubmit }) => {
 
   const onSubmitHandle = (event) => {
     event.preventDefault();
-    registerSubmit(name, email, password);
+    const body = {
+      name,
+      email,
+      password,
+    };
+    axios.post('http://localhost:3000/register', body)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     history.push(`${ROUTE.LOGIN}`);
   };
 
