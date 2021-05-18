@@ -23,7 +23,7 @@ const CourseCard = ({
 
     allCourses.splice(i, 1);
 
-    dispatch(deleteCourse(allCourses));
+    dispatch(deleteCourse(event.target.name));
   };
 
   return (

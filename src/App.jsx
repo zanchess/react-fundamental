@@ -42,9 +42,7 @@ const App = () => {
       password,
     };
 
-    axios.post('http://localhost:3000/login', {
-      ...body,
-    })
+    axios.post('http://localhost:3000/login', body)
       .then((response) => {
         localStorage.setItem('token', response.data.result);
         history.push(ROUTE.COURSES);
@@ -79,9 +77,7 @@ const App = () => {
       password,
     };
 
-    axios.post('http://localhost:3000/register', {
-      ...body,
-    })
+    axios.post('http://localhost:3000/register', body)
       .then((response) => {
         console.log(response);
       })
