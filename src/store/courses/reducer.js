@@ -4,7 +4,7 @@ const initialState = {
   courses: [],
 };
 
-function courses(state = initialState, action) {
+function coursesReducer(state = initialState, action) {
   switch (action.type) {
     case GET_COURSES:
       return {
@@ -24,4 +24,4 @@ function courses(state = initialState, action) {
   return state;
 }
 
-export default courses;
+export default coursesReducer;

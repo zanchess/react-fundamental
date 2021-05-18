@@ -4,7 +4,7 @@ const initialState = {
   authors: [],
 };
 
-function authors(state = initialState, action) {
+function authorsReducer(state = initialState, action) {
   switch (action.type) {
     case GET_AUTHORS:
       return {
@@ -16,4 +16,4 @@ function authors(state = initialState, action) {
   return state;
 }
 
-export default authors;
+export default authorsReducer;

@@ -9,7 +9,7 @@ const initialState = {
   },
 };
 
-function user(state = initialState, action) {
+function userReducer(state = initialState, action) {
   switch (action.type) {
     case LOG_IN:
       console.log(action);
@@ -31,4 +31,4 @@ function user(state = initialState, action) {
   return state;
 }
 
-export default user;
+export default userReducer;
