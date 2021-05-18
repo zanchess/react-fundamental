@@ -3,14 +3,13 @@ import { Button, Card } from 'react-bootstrap';
 import './course-card.scss';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 import { deleteCourse } from '../../store/courses/actionCreators';
 
 const CourseCard = ({
   id, title, start, duration, description, authors, allAuthors,
 }) => {
-  const courses = useSelector((state) => state.coursesReducer.courses);
   const dispatch = useDispatch();
 
   const authorsNameObj = authors
@@ -18,11 +17,6 @@ const CourseCard = ({
     .map((author) => author.name);
 
   const deleteCourseHandle = (event) => {
-    const allCourses = [...courses];
-    const i = courses.findIndex((author) => author.id === event.target.name);
-
-    allCourses.splice(i, 1);
-
     dispatch(deleteCourse(event.target.name));
   };
 

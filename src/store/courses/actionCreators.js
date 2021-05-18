@@ -14,9 +14,9 @@ export function setCourses(courses) {
   };
 }
 
-export function deleteCourse(courses) {
+export function deleteCourse(id) {
   return {
     type: DELETE_COURSE,
-    courses,
+    id,
   };
 }

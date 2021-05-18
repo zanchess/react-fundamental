@@ -125,10 +125,7 @@ const App = () => {
               <CoursesPage
                 courses={filteredCourses.length ? filteredCourses : courses}
                 allAuthors={authors}
-                showCreateCourseForm={showCreateCourseForm}
-                showEditCourseForm={showEditCourseForm}
                 searchCourse={searchCourse}
-                coursesPageIsHidden={coursesPageIsHidden}
               />
             )}
           />

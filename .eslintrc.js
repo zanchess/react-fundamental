@@ -19,7 +19,7 @@ module.exports = {
     'react',
   ],
   rules: {
-    'import/prefer-default-export': 'off',
+    'import/prefer-default-export': 0,
     'react/jsx-props-no-spreading': 0,
     'no-underscore-dangle': 0,
     'linebreak-style': 0,
@@ -46,5 +46,6 @@ module.exports = {
     'import/no-named-as-default': 0,
     'no-restricted-globals': 0,
     'no-nested-ternary': 0,
+    'no-case-declarations': 0,
   },
 };

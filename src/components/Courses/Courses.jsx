@@ -17,7 +17,6 @@ const Courses = (props) => {
       description={course.description}
       authors={course.authors}
       allAuthors={props.allAuthors}
-      showEditCourseForm={props.showEditCourseForm}
     />
   ));
   return (
@@ -43,7 +42,6 @@ CourseCard.propTypes = {
   description: PropTypes.string,
   authors: PropTypes.instanceOf(Array),
   allAuthors: PropTypes.instanceOf(Array),
-  showEditCourseForm: PropTypes.func,
 };
 
 export default Courses;

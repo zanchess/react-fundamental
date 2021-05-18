@@ -9,8 +9,6 @@ import CreateCoursePage from '../CreateCoursePage/CreateCoursePage';
 const CoursesPage = ({
   courses,
   allAuthors,
-  showCreateCourseForm,
-  showEditCourseForm,
   searchCourse,
 }) => (
   <Switch>
@@ -21,8 +19,6 @@ const CoursesPage = ({
         <Courses
           courses={courses}
           allAuthors={allAuthors}
-          showCreateCourseForm={showCreateCourseForm}
-          showEditCourseForm={showEditCourseForm}
           searchCourse={searchCourse}
         />
       )}

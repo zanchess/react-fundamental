@@ -15,8 +15,12 @@ function coursesReducer(state = initialState, action) {
         courses: [...state.courses, action.newCourse],
       };
     case DELETE_COURSE:
+      const i = state.courses.findIndex((author) => author.id === action.id);
+      const allCourses = [...state.courses];
+
+      allCourses.splice(i, 1);
       return {
-        courses: [...action.courses],
+        courses: [...allCourses],
       };
     default:
       break;
