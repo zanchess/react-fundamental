@@ -48,7 +48,7 @@ const App = () => {
     })
       .then((response) => {
         localStorage.setItem('token', response.data.result);
-        history.push(`${ROUTE.COURSES}`);
+        history.push(ROUTE.COURSES);
         dispatch(logIn({
           isAuth: true,
           name: response.data.user.name,
