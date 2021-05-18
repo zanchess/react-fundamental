@@ -3,7 +3,7 @@ import './app.scss';
 import { Route, Switch } from 'react-router-dom';
 import { Redirect, useHistory } from 'react-router';
 import axios from 'axios';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from './components/Header/Header';
 import CoursesPage from './pages/CoursesPage/CoursesPage';
 import ROUTE from './constants/routes';

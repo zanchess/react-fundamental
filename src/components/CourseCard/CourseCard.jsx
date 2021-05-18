@@ -3,13 +3,16 @@ import { Button, Card } from 'react-bootstrap';
 import './course-card.scss';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 import { deleteCourse } from '../../store/courses/actionCreators';
 
 const CourseCard = ({
-  id, title, start, duration, description, authors, allAuthors, courses, removeCourse,
+  id, title, start, duration, description, authors, allAuthors,
 }) => {
+  const courses = useSelector((state) => state.courses.courses);
+  const dispatch = useDispatch();
+
   const authorsNameObj = authors
     .map((authorId) => allAuthors.find((author) => authorId === author.id))
     .map((author) => author.name);
@@ -17,9 +20,10 @@ const CourseCard = ({
   const deleteCourseHandle = (event) => {
     const allCourses = [...courses];
     const i = courses.findIndex((author) => author.id === event.target.name);
+
     allCourses.splice(i, 1);
 
-    removeCourse(allCourses);
+    dispatch(deleteCourse(allCourses));
   };
 
   return (
@@ -73,16 +77,4 @@ CourseCard.propTypes = {
   allAuthors: PropTypes.instanceOf(Array).isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    courses: state.courses.courses,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    removeCourse: (id) => dispatch(deleteCourse(id)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CourseCard);
+export default CourseCard;

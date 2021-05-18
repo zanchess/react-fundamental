@@ -4,7 +4,7 @@ import {
 } from 'react-bootstrap';
 import './course-info-from.scss';
 import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 import { addCourse } from '../../store/courses/actionCreators';
@@ -13,6 +13,9 @@ import SelectedAuthors from '../SelectedAuthor/SelectedAuthors';
 import ROUTE from '../../constants/routes';
 
 const CourseInfoForm = (props) => {
+  const authors = useSelector((state) => state.authors.authors);
+  const dispatch = useDispatch();
+
   // input values
   const history = useHistory();
   const [titleValue, setTitleValue] = useState('');
@@ -30,7 +33,7 @@ const CourseInfoForm = (props) => {
 
   const selectAuthorHandle = (event) => {
     const { name } = event.target;
-    const author = props.authors.find((item) => item.name === name);
+    const author = authors.find((item) => item.name === name);
     setSelectedAuthors([...selectedAuthors, author]);
     console.log(selectedAuthors);
   };
@@ -55,7 +58,7 @@ const CourseInfoForm = (props) => {
       id: uuidv4(),
     };
 
-    props.addCourse(newCourse);
+    dispatch(addCourse(newCourse));
     history.push(`${ROUTE.COURSES}`);
     console.log(newCourse);
   };
@@ -104,7 +107,7 @@ const CourseInfoForm = (props) => {
           <Col className="select-authors" lg={6}>
             <span>List of Authors:</span>
             <div>
-              {props.authors.map((author, i) => (
+              {authors.map((author, i) => (
                 <SelectAuthor
                   selectAuthorHandle={selectAuthorHandle}
                   selectedAuthors={selectedAuthors}
@@ -142,16 +145,4 @@ const CourseInfoForm = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    authors: state.authors.authors,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    addCourse: (course) => dispatch(addCourse(course)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CourseInfoForm);
+export default CourseInfoForm;

@@ -1,21 +1,22 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import './header.scss';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import ROUTE from '../../constants/routes';
 import { logOut } from '../../store/user/actionCreators';
 
-const Header = (props) => {
+const Header = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const logoOutHandle = () => {
-    props.logOut({
+    dispatch(logOut({
       isAuth: false,
       name: '',
       mail: '',
       token: '',
-    });
+    }));
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token');
     }
@@ -34,16 +35,4 @@ const Header = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    logOut: (emptyUser) => dispatch(logOut(emptyUser)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
