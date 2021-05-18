@@ -20,7 +20,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   // state hooks
-  const [coursesPageIsHidden, setCoursesPageStatus] = useState(false);
   const [filteredCourses, setfilteredCourses] = useState([]);
 
   const history = useHistory();
@@ -59,14 +58,6 @@ const App = () => {
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  const showEditCourseForm = () => {
-    setCoursesPageStatus(true);
-  };
-
-  const showCreateCourseForm = () => {
-    setCoursesPageStatus(true);
   };
 
   // func for searching
