@@ -61,7 +61,7 @@ const App = () => {
   // func for searching
   const searchCourse = (searchString) => {
     if (searchString) {
-      const searchedCourses = [...courses]
+      const searchedCourses = courses
         .filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase())
           || course.title.toLowerCase().includes(searchString.toLowerCase()));
       setfilteredCourses(searchedCourses);
