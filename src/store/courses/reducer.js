@@ -1,4 +1,9 @@
-import { ADD_COURSE, GET_COURSES, DELETE_COURSE } from './actionTypes';
+import {
+  ADD_COURSE,
+  GET_COURSES,
+  DELETE_COURSE,
+  UPDATE_COURSE,
+} from './actionTypes';
 
 const initialState = {
   courses: [],
@@ -21,6 +26,15 @@ function coursesReducer(state = initialState, action) {
       allCourses.splice(i, 1);
       return {
         courses: [...allCourses],
+      };
+    case UPDATE_COURSE:
+      const courseIndex = state.courses
+        .findIndex((course) => course.id === action.updatedCourse.id);
+      const allCoursesArr = [...state.courses];
+      console.log(action);
+      allCoursesArr.splice(courseIndex, 1, action.updatedCourse);
+      return {
+        courses: [...allCoursesArr],
       };
     default:
       break;

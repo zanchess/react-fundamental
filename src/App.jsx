@@ -23,19 +23,6 @@ const App = () => {
   const [filteredCourses, setfilteredCourses] = useState([]);
 
   const history = useHistory();
-
-  // Lifecycle hooks
-  useEffect(() => {
-    axios.get('http://localhost:3000/authors/all')
-      .then((res) => {
-        dispatch(setAuthors(res.data.result));
-      });
-    axios.get('http://localhost:3000/courses/all')
-      .then((res) => {
-        dispatch(setCourses(res.data.result));
-      });
-  }, []);
-
   const onFormSubmit = (email, password) => {
     const body = {
       email,

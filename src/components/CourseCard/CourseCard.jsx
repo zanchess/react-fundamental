@@ -51,6 +51,7 @@ const CourseCard = ({
           </Card.Text>
           <div className="btns-block">
             <Link className="btn-link" to={`/courses/${id}`}>Show Course</Link>
+            <Link className="btn-link" to={`/courses/update/${id}`}>Update Course</Link>
             <Button onClick={deleteCourseHandle} name={id} className="btn-group__delete" variant="primary">
               Delete
             </Button>

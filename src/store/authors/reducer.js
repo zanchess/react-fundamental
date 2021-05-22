@@ -7,6 +7,7 @@ const initialState = {
 function authorsReducer(state = initialState, action) {
   switch (action.type) {
     case GET_AUTHORS:
+      console.log(action.authors);
       return {
         authors: [...action.authors],
       };
