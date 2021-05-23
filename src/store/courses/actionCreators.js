@@ -8,7 +8,6 @@ import {
 
 export const addCourse = (newCourse) => (dispatch) => {
   const token = localStorage.getItem('token');
-  console.log(newCourse);
 
   axios.post('http://localhost:3000/courses/add', newCourse, {
     headers: {
@@ -16,7 +15,6 @@ export const addCourse = (newCourse) => (dispatch) => {
     },
   })
     .then((res) => {
-      console.log(res);
       dispatch({
         type: ADD_COURSE,
         newCourse: res.data.result,
@@ -36,12 +34,27 @@ export const setCourses = () => (dispatch) => {
     });
 };
 
-export function deleteCourse(id) {
-  return {
-    type: DELETE_COURSE,
-    id,
-  };
-}
+export const deleteCourse = (id) => (dispatch) => {
+  const token = localStorage.getItem('token');
+
+  axios.delete(`http://localhost:3000/courses/${id}`, {
+    params: {
+      id,
+    },
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then((res) => {
+      dispatch({
+        type: DELETE_COURSE,
+        id,
+      });
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+};
 
 export const updateCourse = (updatedCourse) => (dispatch) => {
   const token = localStorage.getItem('token');
