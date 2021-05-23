@@ -16,12 +16,11 @@ import { setAuthors } from './store/authors/actionCreators';
 const App = () => {
   const authors = useSelector((state) => state.authorsReducer.authors);
   const courses = useSelector((state) => state.coursesReducer.courses);
-  const isAuth = useSelector((state) => state.userReducer.isAuth);
+  const { isAuth } = useSelector((state) => state.userReducer.user);
   const dispatch = useDispatch();
 
   // state hooks
   const [filteredCourses, setfilteredCourses] = useState([]);
-
   const history = useHistory();
 
   // Lifecycle hooks
@@ -32,11 +31,6 @@ const App = () => {
     dispatch(setAuthors());
     dispatch(setCourses());
   }, []);
-
-  const onFormSubmit = async (email, password) => {
-    await dispatch(logIn({ email, password }));
-    history.push(ROUTE.COURSES);
-  };
 
   // func for searching
   const searchCourse = (searchString) => {
@@ -56,7 +50,7 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact name="app" path="/" handler={App}>
-            {isAuth || localStorage.getItem('token') ? (
+            {isAuth ? (
               <>
                 <Redirect from="/" to="courses" />
                 <Route path="/courses" name="courses" handler={CoursesPage} />
@@ -73,10 +67,7 @@ const App = () => {
             exact
             path={ROUTE.LOGIN}
             component={() => (
-              <LoginPage
-                isAuth={isAuth}
-                onFormSubmit={onFormSubmit}
-              />
+              <LoginPage />
             )}
           />
           <Route

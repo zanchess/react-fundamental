@@ -7,6 +7,7 @@ import ROUTE from '../../constants/routes';
 import CourseInfoPage from '../CourseInfoPage/CourseInfoPage';
 import CreateCoursePage from '../CreateCoursePage/CreateCoursePage';
 import UpdateCourse from '../../components/UpdateCourse/UpdateCourse';
+import PrivatRouter from '../../components/PrivatRouter/PrivatRouter';
 
 const CoursesPage = ({
   searchCourse,
@@ -28,8 +29,12 @@ const CoursesPage = ({
           />
         )}
       />
-      <Route path={`${ROUTE.COURSES}${ROUTE.ADD}`} component={() => <CreateCoursePage />} />
-      <Route path={`${ROUTE.COURSES}/update/:id`} component={() => <UpdateCourse courses={courses} allAuthors={authors} />} />
+      <PrivatRouter exact path={`${ROUTE.COURSES}${ROUTE.ADD}`}>
+        <CreateCoursePage />
+      </PrivatRouter>
+      <PrivatRouter exact path={`${ROUTE.COURSES}/update/:id`}>
+        <UpdateCourse courses={courses} allAuthors={authors} />
+      </PrivatRouter>
       <Route path={`${ROUTE.COURSES}/:id`} component={() => <CourseInfoPage courses={courses} allAuthors={authors} />} />
     </Switch>
   );

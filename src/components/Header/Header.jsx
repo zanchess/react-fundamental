@@ -9,7 +9,7 @@ import { logOut } from '../../store/user/actionCreators';
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.userReducer);
+  const { isAuth, name } = useSelector((state) => state.userReducer.user);
 
   const logoOutHandle = () => {
     dispatch(logOut({
@@ -28,8 +28,8 @@ const Header = () => {
     <>
       <nav className="nav">
         <h1>React foundation</h1>
-        <div className={`nav__login ${localStorage.getItem('token') || isAuth ? 'show_log-out' : 'hide_log-out'}`}>
-          <span className="nav__login-name ">Login</span>
+        <div className={`nav__login ${isAuth ? 'show_log-out' : 'hide_log-out'}`}>
+          <span className="nav__login-name ">{name}</span>
           <Button onClick={logoOutHandle} className="nav__logout-btn" variant="link">Log out</Button>
         </div>
       </nav>
