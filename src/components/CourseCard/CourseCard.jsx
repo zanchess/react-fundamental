@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './course-card.scss';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 import { deleteCourse } from '../../store/courses/actionCreators';
@@ -60,16 +59,6 @@ const CourseCard = ({
       </Card>
     </>
   );
-};
-
-CourseCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  start: PropTypes.string.isRequired,
-  duration: PropTypes.number.isRequired,
-  description: PropTypes.string.isRequired,
-  authors: PropTypes.instanceOf(Array).isRequired,
-  allAuthors: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default CourseCard;

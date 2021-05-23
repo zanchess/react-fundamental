@@ -23,26 +23,20 @@ const App = () => {
   const [filteredCourses, setfilteredCourses] = useState([]);
 
   const history = useHistory();
+
+  // Lifecycle hooks
+  useEffect(() => {
+    dispatch(setAuthors());
+    dispatch(setCourses());
+  }, []);
+
   const onFormSubmit = (email, password) => {
     const body = {
       email,
       password,
     };
-
-    axios.post('http://localhost:3000/login', body)
-      .then((response) => {
-        localStorage.setItem('token', response.data.result);
-        history.push(ROUTE.COURSES);
-        dispatch(logIn({
-          isAuth: true,
-          name: response.data.user.name,
-          email: response.data.user.email,
-          token: response.data.result,
-        }));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    history.push(ROUTE.COURSES);
+    dispatch(logIn({ email, password }));
   };
 
   // func for searching
@@ -94,7 +88,7 @@ const App = () => {
             path={ROUTE.COURSES}
             component={() => (
               <CoursesPage
-                courses={filteredCourses.length ? filteredCourses : courses}
+                filteredCourses={filteredCourses.length ? filteredCourses : null}
                 allAuthors={authors}
                 searchCourse={searchCourse}
               />
