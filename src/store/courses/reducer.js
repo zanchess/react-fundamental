@@ -28,11 +28,9 @@ function coursesReducer(state = initialState, action) {
         courses: [...allCourses],
       };
     case UPDATE_COURSE:
-      console.log(action.type);
       const courseIndex = state.courses
         .findIndex((course) => course.id === action.updatedCourse.id);
       const allCoursesArr = [...state.courses];
-      console.log(action);
       allCoursesArr.splice(courseIndex, 1, action.updatedCourse);
       return {
         courses: [...allCoursesArr],

@@ -1,7 +1,6 @@
 import React from 'react';
 import './courses.scss';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import CourseCard from '../CourseCard/CourseCard';
 import Searching from '../Searching/Searching';
 import ROUTE from '../../constants/routes';

@@ -48,19 +48,17 @@ const UpdateCourse = () => {
 
   const submitHandle = (event) => {
     event.preventDefault();
-
     const newCourse = {
       title: titleValue,
       description: descriptionValue,
       creationDate: startDateValue,
-      duration: durationValue,
+      duration: +durationValue,
       authors: selectedAuthors.map((author) => author.id),
       id: uuidv4(),
     };
 
     dispatch(addCourse(newCourse));
     history.push(ROUTE.COURSES);
-    console.log(newCourse);
   };
 
   return (

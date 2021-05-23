@@ -6,12 +6,26 @@ import {
   UPDATE_COURSE,
 } from './actionTypes';
 
-export function addCourse(newCourse) {
-  return {
-    type: ADD_COURSE,
-    newCourse,
-  };
-}
+export const addCourse = (newCourse) => (dispatch) => {
+  const token = localStorage.getItem('token');
+  console.log(newCourse);
+
+  axios.post('http://localhost:3000/courses/add', newCourse, {
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: ADD_COURSE,
+        newCourse: res.data.result,
+      });
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+};
 
 export const setCourses = () => (dispatch) => {
   axios
@@ -31,11 +45,10 @@ export function deleteCourse(id) {
 
 export const updateCourse = (updatedCourse) => (dispatch) => {
   const token = localStorage.getItem('token');
-  console.log(updatedCourse);
 
   axios.put(`http://localhost:3000/courses/${updatedCourse.id}`, updatedCourse, {
     headers: {
-      Authorization: `${token}`,
+      Authorization: token,
     },
   })
     .then((res) => {
