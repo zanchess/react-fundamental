@@ -20,7 +20,6 @@ export const logIn = (body) => (dispatch) => {
               name: res.data.result.name,
               email: res.data.result.email,
               role: res.data.result.role,
-              id: res.data.result.id,
               token,
             },
           });
@@ -43,7 +42,6 @@ export const authorizedLogIn = () => (dispatch) => {
     },
   })
     .then((res) => {
-      console.log(res.data.result.name);
       dispatch({
         type: LOG_IN,
         user: {
@@ -51,10 +49,12 @@ export const authorizedLogIn = () => (dispatch) => {
           name: res.data.result.name,
           email: res.data.result.email,
           role: res.data.result.role,
-          id: res.data.result.id,
           token,
         },
       });
+    })
+    .catch((error) => {
+      throw new Error(error);
     });
 };
 

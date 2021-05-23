@@ -9,7 +9,7 @@ import CoursesPage from './pages/CoursesPage/CoursesPage';
 import ROUTE from './constants/routes';
 import LoginPage from './pages/Login/LoginPage';
 import RegistrationPage from './pages/Registration/RegistrationPage';
-import { logIn } from './store/user/actionCreators';
+import { logIn, authorizedLogIn } from './store/user/actionCreators';
 import { setCourses } from './store/courses/actionCreators';
 import { setAuthors } from './store/authors/actionCreators';
 
@@ -26,17 +26,16 @@ const App = () => {
 
   // Lifecycle hooks
   useEffect(() => {
+    if (localStorage.getItem('token')) {
+      dispatch(authorizedLogIn());
+    }
     dispatch(setAuthors());
     dispatch(setCourses());
   }, []);
 
-  const onFormSubmit = (email, password) => {
-    const body = {
-      email,
-      password,
-    };
+  const onFormSubmit = async (email, password) => {
+    await dispatch(logIn({ email, password }));
     history.push(ROUTE.COURSES);
-    dispatch(logIn({ email, password }));
   };
 
   // func for searching

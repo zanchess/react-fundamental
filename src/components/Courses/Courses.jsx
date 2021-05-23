@@ -34,14 +34,4 @@ const Courses = (props) => {
   );
 };
 
-CourseCard.propTypes = {
-  id: PropTypes.string,
-  title: PropTypes.string,
-  start: PropTypes.string,
-  duration: PropTypes.number,
-  description: PropTypes.string,
-  authors: PropTypes.instanceOf(Array),
-  allAuthors: PropTypes.instanceOf(Array),
-};
-
 export default Courses;

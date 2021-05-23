@@ -29,10 +29,22 @@ export function deleteCourse(id) {
   };
 }
 
-export function updateCourse(updatedCourse) {
+export const updateCourse = (updatedCourse) => (dispatch) => {
+  const token = localStorage.getItem('token');
   console.log(updatedCourse);
-  return {
-    type: UPDATE_COURSE,
-    updatedCourse,
-  };
-}
+
+  axios.put(`http://localhost:3000/courses/${updatedCourse.id}`, updatedCourse, {
+    headers: {
+      Authorization: `${token}`,
+    },
+  })
+    .then((res) => {
+      dispatch({
+        type: UPDATE_COURSE,
+        updatedCourse: res.data.result,
+      });
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+};
