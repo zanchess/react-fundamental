@@ -21,6 +21,7 @@ const App = () => {
 
   // state hooks
   const [filteredCourses, setfilteredCourses] = useState([]);
+  const [filterFlag, setFilterFlag] = useState(false);
   const history = useHistory();
 
   // Lifecycle hooks
@@ -39,7 +40,9 @@ const App = () => {
         .filter((course) => course.id.toLowerCase().includes(searchString.toLowerCase())
           || course.title.toLowerCase().includes(searchString.toLowerCase()));
       setfilteredCourses(searchedCourses);
+      setFilterFlag(true);
     } else {
+      setFilterFlag(false);
       setfilteredCourses([]);
     }
   };
@@ -78,7 +81,7 @@ const App = () => {
             path={ROUTE.COURSES}
             component={() => (
               <CoursesPage
-                filteredCourses={filteredCourses.length ? filteredCourses : null}
+                filteredCourses={filterFlag ? filteredCourses : null}
                 allAuthors={authors}
                 searchCourse={searchCourse}
               />
