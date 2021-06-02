@@ -1,0 +1,41 @@
+.course-info-form{
+  width: 80%;
+  margin: 30px auto;
+
+  .form-row{
+    margin-top: 30px;
+  }
+
+  .course-info-form__add-btn{
+    margin-top: 15px;
+    width: 90px;
+  }
+
+  .course-info-form__back-btn{
+    width: 90px;
+  }
+}
+
+.btn_group{
+  width: 80%;
+  margin:50px auto;
+  display: flex;
+  justify-content: space-around;
+
+  .btn-group__save{
+    width: 120px;
+
+  }
+
+  .btn-group__cancel{
+    width: 120px;
+  }
+}
+.select-authors{
+  padding-left: 40px;
+}
+
+h2{
+  text-align: center;
+  margin-top: 20px;
+}

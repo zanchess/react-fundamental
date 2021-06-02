@@ -2,8 +2,7 @@ import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './course-card.scss';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 import { deleteCourse } from '../../store/courses/actionCreators';
 
@@ -11,6 +10,7 @@ const CourseCard = ({
   id, title, start, duration, description, authors, allAuthors,
 }) => {
   const dispatch = useDispatch();
+  const { role } = useSelector((state) => state.userReducer.user);
 
   const authorsNameObj = authors
     .map((authorId) => allAuthors.find((author) => authorId === author.id))
@@ -51,24 +51,20 @@ const CourseCard = ({
           </Card.Text>
           <div className="btns-block">
             <Link className="btn-link" to={`/courses/${id}`}>Show Course</Link>
-            <Button onClick={deleteCourseHandle} name={id} className="btn-group__delete" variant="primary">
-              Delete
-            </Button>
+            { role === 'admin'
+              ? (
+                <>
+                  <Link className="btn-link" to={`/courses/update/${id}`}>Update Course</Link>
+                  <Button onClick={deleteCourseHandle} name={id} className="btn-group__delete" variant="primary">
+                    Delete
+                  </Button>
+                </>
+              ) : null}
           </div>
         </Card.Body>
       </Card>
     </>
   );
-};
-
-CourseCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  start: PropTypes.string.isRequired,
-  duration: PropTypes.number.isRequired,
-  description: PropTypes.string.isRequired,
-  authors: PropTypes.instanceOf(Array).isRequired,
-  allAuthors: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default CourseCard;

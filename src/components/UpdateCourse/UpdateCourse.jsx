@@ -1,28 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Form, Button, Col, Row,
 } from 'react-bootstrap';
-import './course-info-from.scss';
+import './update-course.scss';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+import { useParams } from 'react-router';
 import getTimeFromMins from '../../utils/get-time-from-mins';
-import { addCourse } from '../../store/courses/actionCreators';
+import { updateCourse } from '../../store/courses/actionCreators';
 import SelectAuthor from '../SelectAuthor/SelectAuthor';
 import SelectedAuthors from '../SelectedAuthor/SelectedAuthors';
 import ROUTE from '../../constants/routes';
 
 const UpdateCourse = () => {
   const authors = useSelector((state) => state.authorsReducer.authors);
+  const courses = useSelector((state) => state.coursesReducer.courses);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { id } = useParams();
 
   // input values
-  const history = useHistory();
   const [titleValue, setTitleValue] = useState('');
   const [descriptionValue, setDescriptionValue] = useState('');
   const [startDateValue, setStartDateValue] = useState('');
   const [durationValue, setDurationValue] = useState('');
   const [selectedAuthors, setSelectedAuthors] = useState([]);
+  const [currentCourse, setCurrentCourse] = useState([]);
+
+  useEffect(() => {
+    if (courses.length) {
+      const course = courses.find((item) => item.id === id);
+      const currentAuthors = course.authors.map((item) => authors
+        .find((author) => author.id === item));
+      setCurrentCourse(course);
+      setSelectedAuthors(currentAuthors);
+      setTitleValue(course.title);
+      setDescriptionValue(course.description);
+      setStartDateValue(course.creationDate);
+      setDurationValue(course.duration);
+    }
+  }, []);
 
   const handleChange = (event) => {
     if (event.target.name === 'title') setTitleValue(event.target.value);
@@ -35,7 +52,6 @@ const UpdateCourse = () => {
     const { name } = event.target;
     const author = authors.find((item) => item.name === name);
     setSelectedAuthors([...selectedAuthors, author]);
-    console.log(selectedAuthors);
   };
 
   const deleteAuthorHandle = (event) => {
@@ -43,26 +59,33 @@ const UpdateCourse = () => {
     const arr = [...selectedAuthors];
     arr.splice(i, 1);
     setSelectedAuthors(arr);
-    console.log(selectedAuthors);
   };
 
   const submitHandle = (event) => {
     event.preventDefault();
-    const newCourse = {
+
+    const updatedCourse = {
       title: titleValue,
       description: descriptionValue,
       creationDate: startDateValue,
-      duration: +durationValue,
+      duration: durationValue,
       authors: selectedAuthors.map((author) => author.id),
-      id: uuidv4(),
+      id: currentCourse.id,
     };
 
-    dispatch(addCourse(newCourse));
+    dispatch(updateCourse(updatedCourse));
     history.push(ROUTE.COURSES);
   };
 
   return (
     <>
+      <h2>
+        Update
+        {' '}
+        {currentCourse.title}
+        {' '}
+        course
+      </h2>
       <Form onSubmit={submitHandle}>
         <Form.Group className="course-info-form">
           <Form.Row>
@@ -132,7 +155,7 @@ const UpdateCourse = () => {
         </Row>
         <div className="btn_group">
           <Button className="btn-group__save" variant="primary" type="submit">
-            Save
+            Update
           </Button>
           <Link />
           <Link className="course-info-page__back btn-link" to={ROUTE.COURSES}>Cancel</Link>

@@ -2,9 +2,9 @@ import React from 'react';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import './login-page.scss';
 
-const LoginPage = ({ onFormSubmit, isAuth }) => (
+const LoginPage = () => (
   <div className="login-page">
-    <LoginForm isAuth={isAuth} onFormSubmit={onFormSubmit} />
+    <LoginForm />
   </div>
 );
 

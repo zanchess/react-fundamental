@@ -3,8 +3,16 @@ import { Form, Button, Row } from 'react-bootstrap';
 import './login-form.scss';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { logIn } from '../../store/user/actionCreators';
+import ROUTE from '../../constants/routes';
 
-const LoginForm = ({ onFormSubmit }) => {
+const LoginForm = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { isAuth } = useSelector((state) => state.userReducer.user);
+
   // reg exp for validation
   const emailRegExp = /^[a-zA-Z0-9]+([-._][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*\.[a-zA-Z]{2,7}$/;
   const passwordRegExp = /^[A-z0-9]+$/;
@@ -37,9 +45,10 @@ const LoginForm = ({ onFormSubmit }) => {
     }
   };
 
-  const submitHandle = (event) => {
+  const submitHandle = async (event) => {
     event.preventDefault();
-    onFormSubmit(email, password);
+    dispatch(logIn({ email, password }));
+    history.push(ROUTE.COURSES);
   };
 
   return (
@@ -76,10 +85,6 @@ const LoginForm = ({ onFormSubmit }) => {
       </Form>
     </>
   );
-};
-
-LoginForm.propTypes = {
-  onFormSubmit: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

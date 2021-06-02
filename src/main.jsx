@@ -5,14 +5,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import App from './App';
 import rootReducer from './store/index';
 
-const middlewears = [];
-
 const getStore = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(...middlewears)),
+  composeWithDevTools(applyMiddleware(thunk)),
 );
 
 const appProvider = (

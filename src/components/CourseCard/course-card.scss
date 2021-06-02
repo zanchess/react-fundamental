@@ -13,8 +13,12 @@
 
   .btns-block{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-left: 40px;
     margin-right: 40px;
+
+    button, a{
+      margin-left: 25px;
+    }
   }
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import './courses.scss';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import CourseCard from '../CourseCard/CourseCard';
 import Searching from '../Searching/Searching';
 import ROUTE from '../../constants/routes';
 
 const Courses = (props) => {
+  const { role } = useSelector((state) => state.userReducer.user);
   const coursesList = props.courses.map((course, index) => (
     <CourseCard
       key={index}
@@ -24,7 +25,9 @@ const Courses = (props) => {
       <div className="courses__block">
         <div className="login-page__control">
           <Searching searchCourse={props.searchCourse} />
-          <Link className="btn-link add-course" to={`${ROUTE.COURSES}${ROUTE.ADD}`}>Add Course</Link>
+          {role === 'admin'
+            ? <Link className="btn-link add-course" to={`${ROUTE.COURSES}${ROUTE.ADD}`}>Add Course</Link>
+            : null}
         </div>
         <div className="course__block_courses">
           {coursesList}
@@ -32,16 +35,6 @@ const Courses = (props) => {
       </div>
     </div>
   );
-};
-
-CourseCard.propTypes = {
-  id: PropTypes.string,
-  title: PropTypes.string,
-  start: PropTypes.string,
-  duration: PropTypes.number,
-  description: PropTypes.string,
-  authors: PropTypes.instanceOf(Array),
-  allAuthors: PropTypes.instanceOf(Array),
 };
 
 export default Courses;
