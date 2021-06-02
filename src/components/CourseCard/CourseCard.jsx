@@ -1,13 +1,15 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import './course-card.scss';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 
 const CourseCard = ({
-  title, start, duration, description, authors, allAuthors, showEditCourseForm,
+  id, title, start, duration, description, authors, allAuthors,
 }) => {
   const authorsNameObj = authors
-    .map((id) => allAuthors.find((author) => id === author.id))
+    .map((authorId) => allAuthors.find((author) => authorId === author.id))
     .map((author) => author.name);
 
   return (
@@ -39,11 +41,21 @@ const CourseCard = ({
               </span>
             ))}
           </Card.Text>
-          <Button onClick={showEditCourseForm} className="course-item__button_edit" variant="primary">Show Course</Button>
+          <Link className="btn-link" to={`/courses/${id}`}>Show Course</Link>
         </Card.Body>
       </Card>
     </>
   );
+};
+
+CourseCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  start: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+  authors: PropTypes.instanceOf(Array).isRequired,
+  allAuthors: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default CourseCard;

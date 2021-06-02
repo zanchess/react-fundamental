@@ -1,0 +1,22 @@
+.course-info-page{
+  margin-top: 30px;
+
+  .course-info-page__header{
+    text-align: center;
+  }
+
+  .course-info-page__info{
+    margin-top: 30px;
+  }
+
+  .course-info-page__back:hover{
+    text-decoration: none;
+    background-color: #84a5ef;
+    transition: all 0.26s ease;
+  }
+
+  .course-info-page__back{
+    margin-top: 60px;
+    margin-left: 100px;
+  }
+}

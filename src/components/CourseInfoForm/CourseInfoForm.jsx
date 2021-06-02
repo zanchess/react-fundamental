@@ -3,10 +3,12 @@ import {
   Form, Button, Col,
 } from 'react-bootstrap';
 import './course-info-from.scss';
+import { useHistory } from 'react-router-dom';
 import getTimeFromMins from '../../utils/get-time-from-mins';
 
-const LoginForm = ({ hideForm }) => {
+const CourseInfoForm = () => {
   // input values
+  const history = useHistory();
   const [titleValue, setTitleValue] = useState('');
   const [descriptionValue, setDescriptionValue] = useState('');
   const [startDateValue, setStartDateValue] = useState('');
@@ -88,7 +90,7 @@ const LoginForm = ({ hideForm }) => {
         <Button className="btn-group__save" variant="primary" type="submit">
           Save
         </Button>
-        <Button onClick={hideForm} className="btn-group__cancel" variant="primary" type="submit">
+        <Button onClick={() => history.push('/courses')} className="btn-group__cancel" variant="primary" type="submit">
           Cancel
         </Button>
       </div>
@@ -96,4 +98,4 @@ const LoginForm = ({ hideForm }) => {
   );
 };
 
-export default LoginForm;
+export default CourseInfoForm;

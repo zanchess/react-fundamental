@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
-import './login-form.scss';
+import './registration.scss';
 import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ROUTE from '../../constants/routes';
 
-const LoginForm = ({ onFormSubmit }) => {
-  // reg exp for validation
-  const emailRegExp = /^[a-zA-Z0-9]+([-._][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*\.[a-zA-Z]{2,7}$/;
-  const passwordRegExp = /^[A-z0-9]+$/;
-
-  // state for login input
+const RegistrationForm = ({ registerSubmit }) => {
   const history = useHistory();
+  // reg exp for validation
+  const emailRegExp = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  const passwordRegExp = /^[A-z0-9]+$/;
+  const nameRegExp = /^[A-z]+$/;
+
+  // state for name input
+  const [name, setName] = useState('');
+  const [invalidNameMessage, showInvalidNameMessage] = useState(false);
+  const [emptyNameMessage, showEmptyNameMessage] = useState(false);
+
+  // state for email input
   const [email, setEmail] = useState('');
   const [invalidEmailMessage, showInvalidEmailMessage] = useState(false);
   const [emptyEmailMessage, showEmptyEmailMessage] = useState(false);
@@ -25,10 +31,15 @@ const LoginForm = ({ onFormSubmit }) => {
   const handleChange = (event) => {
     if (event.target.name === 'email') setEmail(event.target.value);
     if (event.target.name === 'password') setPassword(event.target.value);
+    if (event.target.name === 'name') setName(event.target.value);
   };
 
   // handler for blur event
   const handleBlur = (event) => {
+    if (event.target.name === 'name') {
+      name === '' ? showEmptyNameMessage(true) : showEmptyNameMessage(false);
+      !nameRegExp.test(name) && name !== '' ? showInvalidNameMessage(true) : showInvalidNameMessage(false);
+    }
     if (event.target.name === 'email') {
       email === '' ? showEmptyEmailMessage(true) : showEmptyEmailMessage(false);
       !emailRegExp.test(email) && email !== '' ? showInvalidEmailMessage(true) : showInvalidEmailMessage(false);
@@ -39,20 +50,24 @@ const LoginForm = ({ onFormSubmit }) => {
     }
   };
 
-  const submitHandle = (event) => {
+  const onSubmitHandle = (event) => {
     event.preventDefault();
-    onFormSubmit(email, password);
-    history.push(`${ROUTE.COURSES}`);
+    registerSubmit(name, email, password);
+    history.push(`${ROUTE.LOGIN}`);
   };
 
   return (
     <>
-      <Form
-        onSubmit={submitHandle}
-        className="login-form"
-      >
+      <h2 className="reg__head">Registration</h2>
+      <Form className="login-form" onSubmit={onSubmitHandle}>
         <Form.Group controlId="for">
-          <Row />
+          <Form.Label>Name</Form.Label>
+          <Form.Control className={invalidNameMessage || emptyNameMessage ? 'login-incorrect-border' : null} value={name} onBlur={handleBlur} onChange={handleChange} name="name" type="text" placeholder="name" />
+          <div className={invalidNameMessage ? 'login-incorrect' : 'login-correct'}><span>Incorrect name</span></div>
+          <div className={emptyNameMessage ? 'login-empty' : 'login-not-empty'}><span>Please enter name</span></div>
+        </Form.Group>
+
+        <Form.Group controlId="for">
           <Form.Label>Email</Form.Label>
           <Form.Control className={invalidEmailMessage || emptyEmailMessage ? 'login-incorrect-border' : null} value={email} onBlur={handleBlur} onChange={handleChange} name="email" type="text" placeholder="email" />
           <div className={invalidEmailMessage ? 'login-incorrect' : 'login-correct'}><span>Incorrect email</span></div>
@@ -66,23 +81,22 @@ const LoginForm = ({ onFormSubmit }) => {
           <div className={emptyPasswordMessage ? 'password-empty' : 'password-not-empty'}><span>Please enter password</span></div>
         </Form.Group>
         <Button type="submit" variant="primary" disabled={!(email !== '' && password !== '')}>
-          Sign in
+          Registration
         </Button>
-        <Row className="registr">
-          <p>
-            If you don&apos;t have account you can:
-            {' '}
-            <Link to="/registration">Registration</Link>
-          </p>
-
-        </Row>
       </Form>
+      <Row className="login">
+        <p>
+          If you have account you can:
+          {' '}
+          <Link to={`${ROUTE.LOGIN}`}>Login</Link>
+        </p>
+      </Row>
     </>
   );
 };
 
-LoginForm.propTypes = {
-  onFormSubmit: PropTypes.func.isRequired,
+RegistrationForm.propTypes = {
+  registerSubmit: PropTypes.func.isRequired,
 };
 
-export default LoginForm;
+export default RegistrationForm;
