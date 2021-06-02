@@ -9,30 +9,23 @@ import CreateCoursePage from '../CreateCoursePage/CreateCoursePage';
 const CoursesPage = ({
   courses,
   allAuthors,
-  showCreateCourseForm,
-  showEditCourseForm,
   searchCourse,
-  coursesPageIsHidden,
 }) => (
-  <div className={coursesPageIsHidden ? 'courses hidden' : 'courses visible'}>
-    <Switch>
-      <Route
-        exact
-        path={ROUTE.COURSES}
-        component={() => (
-          <Courses
-            courses={courses}
-            allAuthors={allAuthors}
-            showCreateCourseForm={showCreateCourseForm}
-            showEditCourseForm={showEditCourseForm}
-            searchCourse={searchCourse}
-          />
-        )}
-      />
-      <Route path={`${ROUTE.COURSES}${ROUTE.ADD}`} component={() => <CreateCoursePage />} />
-      <Route path={`${ROUTE.COURSES}/:id`} component={() => <CourseInfoPage courses={courses} allAuthors={allAuthors} />} />
-    </Switch>
-  </div>
+  <Switch>
+    <Route
+      exact
+      path={ROUTE.COURSES}
+      component={() => (
+        <Courses
+          courses={courses}
+          allAuthors={allAuthors}
+          searchCourse={searchCourse}
+        />
+      )}
+    />
+    <Route path={`${ROUTE.COURSES}${ROUTE.ADD}`} component={() => <CreateCoursePage />} />
+    <Route path={`${ROUTE.COURSES}/:id`} component={() => <CourseInfoPage courses={courses} allAuthors={allAuthors} />} />
+  </Switch>
 );
 
 export default CoursesPage;

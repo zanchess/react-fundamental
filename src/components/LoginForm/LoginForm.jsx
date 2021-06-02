@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button, Row } from 'react-bootstrap';
 import './login-form.scss';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ROUTE from '../../constants/routes';
 
 const LoginForm = ({ onFormSubmit }) => {
   // reg exp for validation
@@ -11,7 +10,6 @@ const LoginForm = ({ onFormSubmit }) => {
   const passwordRegExp = /^[A-z0-9]+$/;
 
   // state for login input
-  const history = useHistory();
   const [email, setEmail] = useState('');
   const [invalidEmailMessage, showInvalidEmailMessage] = useState(false);
   const [emptyEmailMessage, showEmptyEmailMessage] = useState(false);
@@ -42,7 +40,6 @@ const LoginForm = ({ onFormSubmit }) => {
   const submitHandle = (event) => {
     event.preventDefault();
     onFormSubmit(email, password);
-    history.push(`${ROUTE.COURSES}`);
   };
 
   return (

@@ -58,7 +58,7 @@ const CourseInfoPage = ({ allAuthors, courses }) => {
             </Col>
           </Row>
         </Container>
-        <Link className="course-info-page__back btn-link" to={`${ROUTE.COURSES}`}>Back</Link>
+        <Link className="course-info-page__back btn-link" to={ROUTE.COURSES}>Back</Link>
 
       </div>
     </>

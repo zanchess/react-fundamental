@@ -7,6 +7,10 @@
   padding-left: 30px;
   padding-right: 30px;
 
+  .hide_log-out{
+    display: none;
+  }
+
   h1{
     color: aliceblue;
   }
@@ -21,6 +25,8 @@
     .nav__logout-btn{
       margin-left: 20px;
     }
+
+
   }
 
 

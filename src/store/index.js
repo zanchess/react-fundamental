@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import user from './user/reducer';
-import courses from './courses/reducer';
-import authors from './authors/reducer';
+import userReducer from './user/reducer';
+import coursesReducer from './courses/reducer';
+import authorsReducer from './authors/reducer';
 
 export default combineReducers({
-  user, courses, authors,
+  userReducer, coursesReducer, authorsReducer,
 });

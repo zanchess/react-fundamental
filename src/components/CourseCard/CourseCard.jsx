@@ -1,16 +1,24 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import './course-card.scss';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import getTimeFromMins from '../../utils/get-time-from-mins';
+import { deleteCourse } from '../../store/courses/actionCreators';
 
 const CourseCard = ({
   id, title, start, duration, description, authors, allAuthors,
 }) => {
+  const dispatch = useDispatch();
+
   const authorsNameObj = authors
     .map((authorId) => allAuthors.find((author) => authorId === author.id))
     .map((author) => author.name);
+
+  const deleteCourseHandle = (event) => {
+    dispatch(deleteCourse(event.target.name));
+  };
 
   return (
     <>
@@ -41,7 +49,12 @@ const CourseCard = ({
               </span>
             ))}
           </Card.Text>
-          <Link className="btn-link" to={`/courses/${id}`}>Show Course</Link>
+          <div className="btns-block">
+            <Link className="btn-link" to={`/courses/${id}`}>Show Course</Link>
+            <Button onClick={deleteCourseHandle} name={id} className="btn-group__delete" variant="primary">
+              Delete
+            </Button>
+          </div>
         </Card.Body>
       </Card>
     </>

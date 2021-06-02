@@ -67,8 +67,10 @@
     "react-sound": "^1.2.0",
     "react-use-gesture": "^7.0.15",
     "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
     "redux-form": "^8.3.7",
     "redux-thunk": "^2.3.0",
-    "resolve-url-loader": "^3.1.2"
+    "resolve-url-loader": "^3.1.2",
+    "uuid": "^8.3.2"
   }
 }
