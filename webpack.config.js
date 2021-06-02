@@ -84,7 +84,7 @@ module.exports = {
 
   devServer: {
     contentBase: '/',
-    port: 8181,
+    port: 8180,
     historyApiFallback: true,
     inline: true,
     hot: true,

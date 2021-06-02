@@ -1,0 +1,27 @@
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .container{
+    padding-left: 0;
+    margin-left: 0;
+  }
+  h1{
+    color: aliceblue;
+  }
+
+  .nav__login{
+
+
+    .nav__login-name{
+      color: aliceblue;
+      font-size: 20px;
+    }
+
+    .nav__logout-btn{
+
+    }
+  }
+
+
+}

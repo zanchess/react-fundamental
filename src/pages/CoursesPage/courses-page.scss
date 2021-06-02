@@ -1,0 +1,17 @@
+.courses__block{
+  width: 80%;
+  margin: 20px auto;
+
+  .login-page__control{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-left: 70px;
+    padding-right: 70px;
+    box-sizing: border-box;
+  }
+
+  .add-btn{
+    height: 38px;
+  }
+}

@@ -1,3 +1,10 @@
 .content{
-  display: flex;
+
+  .visible{
+    display: block;
+  }
+
+  .hidden{
+    display: none;
+  }
 }

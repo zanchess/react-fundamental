@@ -1,0 +1,13 @@
+.searching {
+  width: 400px;
+
+  .searching__group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .searching__input{
+      width: 300px;
+    }
+  }
+}
